@@ -1,3 +1,11 @@
+/**
+ * Project: Java Bootcamp
+ * Author: Jack Dai
+ * Purpose: Tester class for Project 1.
+ *          Verifies constructors, getters/setters, computeDiagonal,
+ *          and toString functionality.
+ */
+
 // Write a file header with your name and class purpose
 
 // Once you have completed both the Rectangle class and this Tester class,
@@ -25,6 +33,11 @@
 public class Tester {
 
     // Define a static testRectangle method
+    /**
+     * Tests Rectangle class functionality:
+     * verifies setters/getters, diagonal computation,
+     * and toString output
+     */
     public static void testRectangle() {
         // Define and initialize 1 rectangle with width 3 and height 7
         Rectangle rectangle = new Rectangle(3.0, 7.0);
@@ -36,10 +49,12 @@ public class Tester {
 
         // Call the computeDiagonal method and print the output
         // Confirm that it is 5
+        // Compute diagonal using the Pythagorean theorem
         System.out.println(rectangle.computeDiagonal());
 
         // Initialize 1 square using the second constructor
         // with width and height of 2.2
+        // Create a 2.2 x 2.2 square to test the second constructor
         Rectangle square = new Rectangle(2.2, 2.2);
 
         // Get the height and width of the square
@@ -57,6 +72,10 @@ public class Tester {
     }
 
     // define a static main method
+    /**
+     * Calls testRectangle
+     * and runs additional array tests
+     */
     public static void main(String[] args) {
         // Call the testRectangle method to run your tests
         testRectangle();

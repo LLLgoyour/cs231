@@ -1,7 +1,7 @@
-/*
- * project: Java Bootcamp
- * Jack Dai
- * Simple rectangle class for project 1
+/**
+ * Project: Java Bootcamp
+ * Author: Jack Dai
+ * Purpose: rectangle class for project 1
  */
 
 public class Rectangle {
@@ -40,9 +40,9 @@ public class Rectangle {
      * This is the constructor that takes in the width value and calls the first
      * constructor with the width and the height equal.
      * 
-     * @param width
+     * @param width the length of the square
      */
-    public Rectangle(int width) {
+    public Rectangle(double width) {
         this(width, width);
     }
 
@@ -112,7 +112,7 @@ public class Rectangle {
     // "Height: [[height]], Width: [[width]], Diagonal: [[length of diagonal]]"
     // eg: "Height: 3.0, Width: 4.0, Diagonal: 5.0"
     public String toString() {
-        return String.format("Height: %.1f, Width: %.1f, Diagonal: %.1f",
+        return String.format("Height: %.1f, Width: %.1f, Diagonal: %s",
                 this.height, this.width, computeDiagonal());
     }
 }
