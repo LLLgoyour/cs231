@@ -20,9 +20,11 @@ public class ArrayList<T> {
 
     /**
      * The default constructor for the ArrayList
+     * that calls the existing constructor
+     * with initialCapacity set to 1
      */
     public ArrayList() {
-        // TODO
+        this(1);
     }
 
     /**
@@ -45,12 +47,19 @@ public class ArrayList<T> {
     }
 
     /**
-     * Adds an item to the end of the list.
-     *
+     * Adds item to the end of the ArrayList. If that would increase size beyond the
+     * current ArrayList capacity, first resize the ArrayList to have 2 * capacity,
+     * then insert the item
+     * 
      * @param item the item to add to the list
      */
     public void add(T item) {
-        // TODO
+        if (this.size + 1 > arr.length) {
+            int newCapacity = Math.max(1, 2 * size);
+            changeCapacity(newCapacity);
+        }
+        arr[this.size] = item;
+        size++;
     }
 
     /**
@@ -60,7 +69,7 @@ public class ArrayList<T> {
      * @return the element at the specified position in the list
      */
     public T get(int index) {
-        // TODO
+        return arr[index];
     }
 
     /**
@@ -70,7 +79,7 @@ public class ArrayList<T> {
      * @param index the position of the list element to set
      */
     public void set(int index, T item) {
-        // TODO
+        arr[index] = item;
     }
 
     /**

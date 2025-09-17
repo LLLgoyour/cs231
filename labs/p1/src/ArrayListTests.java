@@ -2,8 +2,8 @@ package labs.p1.src;
 
 /*
 file name:      ArrayListTests.java
-Authors:        Jack Dai
-last modified:  09/18/25
+Authors:        Ike Lage
+last modified:  02/18/25
 
 How to run:     java -ea ArrayListTests
 */
