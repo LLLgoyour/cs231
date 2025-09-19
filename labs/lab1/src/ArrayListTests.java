@@ -1,4 +1,4 @@
-package labs.p1.src;
+package labs.lab1.src;
 
 /*
 file name:      ArrayListTests.java

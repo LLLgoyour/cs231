@@ -8,7 +8,7 @@
  *
  * @param <T> the type of elements stored in the list
  */
-package labs.p1.src;
+package labs.lab1.src;
 
 public class ArrayList<T> {
 
