@@ -91,6 +91,11 @@ public class Blackjack {
                 "\nThe dealer hand: " + dealerHand.toString() + " (Total: " + dealerHand.getTotalValue() + ")";
     }
 
+    /**
+     * 
+     * @param verbose
+     * @return
+     */
     public int game(boolean verbose) {
         // Reset the game and reshuffle the deck if needed
         reset();
@@ -152,10 +157,42 @@ public class Blackjack {
             if (verbose) {
                 System.out.println("It's a tie.");
             }
+            return 0; // If the player and dealer tie
         }
     }
 
-    public static void main(String[] args) {
+    /**
+     * Getter for playerHand
+     * 
+     * @return playerHand
+     */
+    public Hand getPlayerHand() {
+        return playerHand;
+    }
 
+    /**
+     * Getter for dealerHand
+     * 
+     * @return dealerHand
+     */
+    public Hand getDealerHand() {
+        return dealerHand;
+    }
+
+    /**
+     * Getter for deck
+     * 
+     * @return deck
+     */
+    public Deck getDeck() {
+        return deck;
+    }
+
+    // Use the main method to run the game
+    public static void main(String[] args) {
+        Blackjack blackjack = new Blackjack();
+
+        // run the game with the verbose output
+        blackjack.game(true);
     }
 }
