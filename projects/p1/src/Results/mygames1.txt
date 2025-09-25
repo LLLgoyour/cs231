@@ -1,0 +1,6 @@
+Initial hands: 
+The player hand: [4] : 4 (Total: 4)
+The dealer hand: [11] : 11 (Total: 11)
+The dealer busts. The player wins.
+Final player's hand: [4, 10, 2] : 16 (Total: 16).
+Final dealer's hand: [11, 11] : 22 (Total: 22).

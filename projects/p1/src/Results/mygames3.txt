@@ -1,0 +1,6 @@
+Initial hands: 
+The player hand: [8] : 8 (Total: 8)
+The dealer hand: [7] : 7 (Total: 7)
+Final player's hand: [8, 10] : 18 (Total: 18).
+Final dealer's hand: [7, 3, 10] : 20 (Total: 20).
+The dealer wins.

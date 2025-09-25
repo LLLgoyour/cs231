@@ -1,0 +1,9 @@
+Run 100 times. 
+The result is --->  
+player wins: 42 
+dealer wins: 50 
+ties: 8
+
+Dealer's win rate: 50.0%
+Player's win rate: 42.0%
+Tie rate: 8.0%

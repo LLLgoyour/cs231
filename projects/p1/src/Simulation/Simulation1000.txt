@@ -1,0 +1,9 @@
+Run 1000 times. 
+The result is --->  
+player wins: 419 
+dealer wins: 499 
+ties: 82
+
+Dealer's win rate: 49.9%
+Player's win rate: 41.9%
+Tie rate: 8.2%

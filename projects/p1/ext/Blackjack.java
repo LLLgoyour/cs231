@@ -1,4 +1,6 @@
-package projects.p1.src;
+package projects.p1.ext;
+
+import java.util.Scanner;
 
 /*
  * File name: Blackjack.java
@@ -6,9 +8,10 @@ package projects.p1.src;
  * Last modified: 9/24/2025
  *
  * Purpose of this class:
- * This class implements the Blackjack card game.
+ * This class implements the Blackjack card game
  * It manages the deck, player hand, dealer hand, and the game rules for
  * dealing, taking turns, checking for busts, and determining the winner
+ * This class includes extension methods
  */
 
 public class Blackjack {
@@ -87,6 +90,53 @@ public class Blackjack {
             dealerHand.add(deck.deal());
             if (dealerHand.getTotalValue() > 21) {
                 return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * This method is part of the interactive player turn extension
+     * Allows a human player to choose to hit or stay using terminal input
+     *
+     * @param scanner a Scanner connected to System.in for reading player input
+     * @return false if the player busts, true otherwise
+     */
+    public boolean playerTurnInteractive(Scanner scanner) {
+        // Print current player hand and dealer's hand
+        System.out.println("Your hand: " + playerHand.toString() + " (Total: " + playerHand.getTotalValue() + ")");
+        if (dealerHand.size() > 0) {
+            System.out.println("Dealer's visible card: " + dealerHand.getCard(0));
+        }
+
+        while (true) {
+            // Ask player for action
+            System.out.print("Do you want to 'hit' or 'stay'? ");
+            String line = scanner.nextLine();
+            if (line == null) {
+                // treat EOF as stay
+                break;
+            }
+            line = line.trim().toLowerCase();
+            if (line.equals("hit") || line.equals("h")) {
+                playerHand.add(deck.deal());
+                System.out.println("You drew: " + playerHand.getCard(playerHand.size() - 1));
+                System.out.println(
+                        "Your hand: " + playerHand.toString() + " (Total: " + playerHand.getTotalValue() + ")");
+                if (playerHand.getTotalValue() > 21) {
+                    System.out.println("You busted!");
+                    return false;
+                } else if (playerHand.getTotalValue() == 21) {
+                    System.out.println("You have 21.");
+                    return true;
+                }
+            } else if (line.equals("stay") || line.equals("s")) {
+                // player stays
+                System.out.println(
+                        "You stay with: " + playerHand.toString() + " (Total: " + playerHand.getTotalValue() + ")");
+                break;
+            } else {
+                System.out.println("Please type 'hit' (or 'h') to draw a card, or 'stay' (or 's') to end your turn.");
             }
         }
         return true;

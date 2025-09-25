@@ -1,4 +1,4 @@
-package projects.p1.src;
+package projects.p1.ext;
 /*
 file name:      DeckTests.java
 Authors:        Max Bender & Naser Al Madi & Jack Dai

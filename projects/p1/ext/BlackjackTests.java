@@ -1,4 +1,4 @@
-package projects.p1.src;
+package projects.p1.ext;
 
 /*
 file name:      BlackjackTests.java
