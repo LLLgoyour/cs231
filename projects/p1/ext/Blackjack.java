@@ -57,6 +57,9 @@ public class Blackjack {
      * Deals one card each to the player and the dealer
      */
     public void deal() {
+        // Standard initial deal: two cards each (player first then dealer)
+        playerHand.add(deck.deal());
+        dealerHand.add(deck.deal());
         playerHand.add(deck.deal());
         dealerHand.add(deck.deal());
     }
@@ -179,11 +182,45 @@ public class Blackjack {
      */
     public int game(boolean verbose) {
         reset(); // Reset the game and shuffle the deck if necessary
-        deal(); // Deal the initial cards
+        deal(); // Deal the initial two cards each
 
         if (verbose) {
             System.out.println("Initial hands: ");
             System.out.println(this.toString());
+        }
+
+        // Check for Blackjack (two-card 21) before any additional drawing
+        boolean playerBJ = playerHand.isBlackjack();
+        boolean dealerBJ = dealerHand.isBlackjack();
+
+        if (playerBJ || dealerBJ) {
+            if (verbose) {
+                System.out.println("Blackjack check -> playerBJ=" + playerBJ + ", dealerBJ=" + dealerBJ);
+            }
+
+            // Both have blackjack -> push
+            if (playerBJ && dealerBJ) {
+                if (verbose) {
+                    System.out.println("Both player and dealer have Blackjack. It's a tie (push).");
+                }
+                return 0;
+            }
+
+            // Player has blackjack -> player wins
+            if (playerBJ) {
+                if (verbose) {
+                    System.out.println("Player has Blackjack (two-card 21). Player wins.");
+                }
+                return 1;
+            }
+
+            // Dealer has blackjack -> dealer wins
+            if (dealerBJ) {
+                if (verbose) {
+                    System.out.println("Dealer has Blackjack (two-card 21). Dealer wins.");
+                }
+                return -1;
+            }
         }
 
         // Player's turn

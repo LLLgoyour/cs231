@@ -1,9 +1,12 @@
 package projects.p1.src;
 
 /*
+ * file name: Hand.java
  * Author: Jack Dai
+ * Last modified: 9/24/2025
  * 
- * Purpose of the class: TODO
+ * Purpose of the class: 
+ * This class hold a set of cards
  */
 
 public class Hand {
@@ -13,6 +16,9 @@ public class Hand {
      */
     private ArrayList<Card> hand;
 
+    /**
+     * Constructs an empty Hand
+     */
     public Hand() {
         hand = new ArrayList<Card>();
     }

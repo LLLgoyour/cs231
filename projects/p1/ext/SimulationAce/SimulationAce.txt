@@ -1,0 +1,9 @@
+Run 10000 times. 
+The result is --->  
+player wins: 4126 
+dealer wins: 4959 
+ties: 915
+
+Dealer's win rate: 49.59%
+Player's win rate: 41.260000000000005%
+Tie rate: 9.15%

@@ -1,9 +1,13 @@
 package projects.p1.ext;
 
 /*
+ * file name: Hand.java
  * Author: Jack Dai
+ * Last modified: 9/24/2025
  * 
- * Purpose of the class: TODO
+ * Purpose of the class: 
+ * This class hold a set of cards
+ * and is updated with extension methods
  */
 
 public class Hand {
@@ -13,6 +17,9 @@ public class Hand {
      */
     private ArrayList<Card> hand;
 
+    /**
+     * Constructs an empty Hand
+     */
     public Hand() {
         hand = new ArrayList<Card>();
     }
@@ -64,10 +71,33 @@ public class Hand {
      */
     public int getTotalValue() {
         int sum = 0;
+        int aces = 0; // count of aces (value 11)
+
         for (int i = 0; i < hand.size(); i++) {
-            sum += hand.get(i).getValue();
+            int v = hand.get(i).getValue();
+            sum += v;
+            if (v == 11) {
+                aces++;
+            }
         }
+
+        // Convert some Aces from 11 to 1 (subtract 10) while beneficial
+        while (sum > 21 && aces > 0) {
+            sum -= 10; // treat one ace as 1 instead of 11
+            aces--;
+        }
+
         return sum;
+    }
+
+    /**
+     * Returns true if this hand is a "Blackjack": exactly two cards totaling 21.
+     * Typically this is an Ace (11) + a 10-value card.
+     *
+     * @return true if the hand is a two-card 21, false otherwise
+     */
+    public boolean isBlackjack() {
+        return hand.size() == 2 && getTotalValue() == 21;
     }
 
     /**

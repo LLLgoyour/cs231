@@ -1,22 +1,21 @@
 package projects.p1.src;
 
 /**
+ * file name: Card.java
  * Author: Jack Dai
+ * last modified: 9/24/2025
  * 
- * Purpose of the class: TODO
- * 
+ * Purpose of the class:
+ * This class hold all information unique to the card
  */
-public class Card {
 
-    /**
-     * The value of the card.
-     */
+public class Card {
     private int value;
 
     /**
      * Constructs a card with the specified value.
      * 
-     * @param val
+     * @param val value of the card
      */
     public Card(int val) {
         if (2 <= val && val <= 11) {

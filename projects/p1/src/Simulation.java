@@ -6,7 +6,7 @@ package projects.p1.src;
  * Last modified: 9/24/2025
  * 
  * Purpose of the class:
- * This simulated the game Blackjack for 1000 times 
+ * This simulated the game Blackjack for 100, 1000, and 10000 times 
  * and print out the game result
  */
 

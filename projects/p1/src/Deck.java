@@ -8,8 +8,11 @@ import java.util.Random;
  * Author: Jack Dai
  * Last modified: 9/18/2025
  * 
- * Purpose of the class: TODO
+ * Purpose of the class: 
+ * This class hold a set of cards 
+ * and be able to shuffle and deal the cards
  */
+
 public class Deck {
 
     /**

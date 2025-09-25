@@ -6,7 +6,7 @@ package projects.p1.ext;
  * Last modified: 9/24/2025
  * 
  * Purpose of the class:
- * This simulated the game Blackjack for 1000 times 
+ * This simulated the game Blackjack for 100, 1000, and 10000 times
  * and print out the game result
  */
 
@@ -16,7 +16,7 @@ public class Simulation {
         {
             // set up
             int playerCount = 0, dealerCount = 0, tieCount = 0;
-            int N = 1000; // number of games to simulate
+            int N = 10000; // number of games to simulate
             Blackjack blackjack = new Blackjack(); // Create an instance of Blackjack
 
             for (int i = 0; i < N; i++) {
