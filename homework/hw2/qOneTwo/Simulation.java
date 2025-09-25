@@ -1,25 +1,19 @@
 /**
  * Homework 2 Simulations
- * Question 4
+ * Question 2
  */
 
-package hw2.qThreeFour;
+package homework.hw2.qOneTwo;
 
 public class Simulation {
     public static double play(int target) {
-        NewCoin coinOne = new NewCoin();
-        NewCoin coinTwo = new NewCoin();
-        NewCoin coinThree = new NewCoin();
+        Coin coinOne = new Coin();
+        Coin coinTwo = new Coin();
         int count = 0;
         for (int i = 0; i < target; i++) {
             coinOne.flip();
             coinTwo.flip();
-            coinThree.flip();
-            // cache values to avoid repeated method calls
-            int v1 = coinOne.getValue();
-            int v2 = coinTwo.getValue();
-            int v3 = coinThree.getValue();
-            if (v1 == v2 && v2 == v3) {
+            if (coinOne.getValue() == coinTwo.getValue()) {
                 count++;
             }
         }

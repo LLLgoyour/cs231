@@ -1,20 +1,20 @@
 /**
  * Homework 2 Simulations
- * Question 3
+ * Question 1
  */
 
-package hw2.qThreeFour;
+package homework.hw2.qOneTwo;
 
 import java.util.Random;
 
-public class NewCoin {
+public class Coin {
 
     private int value;
     private String side;
-    private static final Random random = new Random();
+    Random random = new Random();
 
-    public NewCoin() {
-        if (random.nextDouble() < 0.3) {
+    public Coin() {
+        if (random.nextBoolean()) {
             side = "Heads";
             value = 1;
         } else {
@@ -28,7 +28,7 @@ public class NewCoin {
     }
 
     public void flip() {
-        if (random.nextDouble() < 0.3) {
+        if (random.nextBoolean()) {
             side = "Heads";
             value = 1;
         } else {
@@ -42,7 +42,7 @@ public class NewCoin {
     }
 
     public static void main(String[] args) {
-        NewCoin coin = new NewCoin();
+        Coin coin = new Coin();
         coin.flip();
         System.out.println(coin);
     }
