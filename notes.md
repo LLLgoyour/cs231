@@ -55,3 +55,47 @@ public class TicTacToe {
     }
 }
 ```
+
+##### LinkedList Concept
+
+1. create a new node with the passed value
+2. make node at tail point to new node
+3. make tail reference to new node
+4. so the time complexity is O(1), much better than arraylist O(n)
+
+##### Node
+
+A node consists of data and next (reference to the next node)
+
+```java
+// create a node class inside a LinkedList class
+public class LinkedList {
+    public LinkedList() {
+        this.head = null;
+        this.tail = null;
+    }
+
+    public class Node {
+
+        public int data;
+        public Node next; // reference to the next node
+
+        public Node() {
+            this.data = 0;
+            this.next = null;
+        }
+
+        public Node(int newData){
+            this.data = newData;
+            this.next = null;
+        }
+
+        public Node(int newData, Node newNext){
+            this.data = newData;
+            this.next = newNext;
+        }
+    }
+    private Node head;
+    private Node tail;
+}
+```
