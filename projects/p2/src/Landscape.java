@@ -106,7 +106,19 @@ public class Landscape {
      * Returns a String representation of the Landscape.
      */
     public String toString() {
-        return 
+        String s = "";
+        for (int i = 0; i < getRows(); i++) {
+            for (int j = 0; j < getCols(); j++) {
+                s = s + landscape[i][j].toString();
+                if (j < getCols() - 1) {
+                    s = s + " ";
+                }
+            }
+            if (i < getRows() - 1) {
+                s = s + "\n";
+            }
+        }
+        return s;
     }
 
     /**
@@ -117,6 +129,23 @@ public class Landscape {
      * @return an ArrayList of the neighboring Cells to the specified location
      */
     public ArrayList<Cell> getNeighbors(int row, int col) {
+        ArrayList<Cell> neighbors = new ArrayList<Cell>();
+        // iterate from -1 to 1
+        // and skip landscape[row][col]
+        for (int i = -1; i <= 1; i++) {
+            for (int j = -1; j <= 1; j++) {
+                if (i == 0 && j == 0) {
+                    continue; // skip the cell itself
+                }
+                int r = row + i;
+                int c = col + j;
+                // make sure the neighboring cells are not out of bound
+                if (r >= 0 && r < getRows() && c >= 0 && c < getCols()) {
+                    neighbors.add(landscape[r][c]);
+                }
+            }
+        }
+        return neighbors;
     }
 
     /**

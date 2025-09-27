@@ -68,8 +68,8 @@ public class LandscapeTests {
             Landscape l1 = new Landscape(2, 4, 1);
 
             // verify
-            System.out.println(l1.getCell(0, 0) + " == TODO");
-            System.out.println(l1.getCell(0, 3) + " == TODO");
+            System.out.println(l1.getCell(0, 0) + " == 1");
+            System.out.println(l1.getCell(0, 3) + " == 1");
 
             // test
             assert l1.getCell(0, 0) != null : "Error in Landscape::getCell()";
@@ -95,7 +95,7 @@ public class LandscapeTests {
                     }
                 }
             }
-            System.out.println(total + " == TODO");
+            System.out.println(total + " == 2");
 
             // test
             l1.reset();
@@ -108,8 +108,8 @@ public class LandscapeTests {
                     }
                 }
             }
-            System.out.println(total2 + " == TODO");
-            assert total2 == TODO : "Error in Landscape::reset()";
+            System.out.println(total2 + " == 0");
+            assert total2 == 0 : "Error in Landscape::reset()";
 
         }
 
@@ -123,12 +123,12 @@ public class LandscapeTests {
             ArrayList<Cell> n1 = l1.getNeighbors(0, 0);
             ArrayList<Cell> n2 = l1.getNeighbors(1, 1);
 
-            System.out.println(n1.size() + " == TODO");
-            System.out.println(n2.size() + " == TODO");
+            System.out.println(n1.size() + " == 3");
+            System.out.println(n2.size() + " == 8");
 
             // test
-            assert n1.size() == TODO : "Error in Landscape::getNeighbors(int, int)";
-            assert n2.size() == TODO : "Error in Landscape::getNeighbors(int, int)";
+            assert n1.size() == 3 : "Error in Landscape::getNeighbors(int, int)";
+            assert n2.size() == 8 : "Error in Landscape::getNeighbors(int, int)";
 
         }
 
@@ -150,25 +150,25 @@ public class LandscapeTests {
             l1.advance();
             System.out.println(l1);
 
-            System.out.println(l1.getCell(0, 0).getAlive() + " == TODO");
-            System.out.println(l1.getCell(0, 1).getAlive() + " == TODO");
-            System.out.println(l1.getCell(0, 2).getAlive() + " == TODO");
-            System.out.println(l1.getCell(1, 0).getAlive() + " == TODO");
-            System.out.println(l1.getCell(1, 1).getAlive() + " == TODO");
-            System.out.println(l1.getCell(1, 2).getAlive() + " == TODO");
-            System.out.println(l1.getCell(2, 0).getAlive() + " == TODO");
-            System.out.println(l1.getCell(2, 1).getAlive() + " == TODO");
-            System.out.println(l1.getCell(2, 2).getAlive() + " == TODO");
+            System.out.println(l1.getCell(0, 0).getAlive() + " == true");
+            System.out.println(l1.getCell(0, 1).getAlive() + " == false");
+            System.out.println(l1.getCell(0, 2).getAlive() + " == true");
+            System.out.println(l1.getCell(1, 0).getAlive() + " == false");
+            System.out.println(l1.getCell(1, 1).getAlive() + " == true");
+            System.out.println(l1.getCell(1, 2).getAlive() + " == false");
+            System.out.println(l1.getCell(2, 0).getAlive() + " == true");
+            System.out.println(l1.getCell(2, 1).getAlive() + " == true");
+            System.out.println(l1.getCell(2, 2).getAlive() + " == false");
 
-            assert l1.getCell(0, 0).getAlive() == TODO;
-            assert l1.getCell(0, 1).getAlive() == TODO;
-            assert l1.getCell(0, 2).getAlive() == TODO;
-            assert l1.getCell(1, 0).getAlive() == TODO;
-            assert l1.getCell(1, 1).getAlive() == TODO;
-            assert l1.getCell(1, 2).getAlive() == TODO;
-            assert l1.getCell(2, 0).getAlive() == TODO;
-            assert l1.getCell(2, 1).getAlive() == TODO;
-            assert l1.getCell(2, 2).getAlive() == TODO;
+            assert l1.getCell(0, 0).getAlive() == true;
+            assert l1.getCell(0, 1).getAlive() == false;
+            assert l1.getCell(0, 2).getAlive() == true;
+            assert l1.getCell(1, 0).getAlive() == false;
+            assert l1.getCell(1, 1).getAlive() == true;
+            assert l1.getCell(1, 2).getAlive() == false;
+            assert l1.getCell(2, 0).getAlive() == true;
+            assert l1.getCell(2, 1).getAlive() == true;
+            assert l1.getCell(2, 2).getAlive() == false;
 
         }
     }
