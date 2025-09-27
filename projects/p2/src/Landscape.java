@@ -1,6 +1,14 @@
+/*
+file name:      Landscape.java
+Authors:        Jack Dai
+last modified:  09/26/2025
+purpose of this class:  
+*/
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Landscape {
 
@@ -35,6 +43,21 @@ public class Landscape {
      * @param chance  the probability each individual Cell is initially alive
      */
     public Landscape(int rows, int columns, double chance) {
+        Random r = new Random();
+        landscape = new Cell[rows][columns];
+        reset();
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                if (r.nextDouble() < chance) {
+                    // if a random number is below the probability
+                    // then set the cell alive
+                    landscape[i][j].setAlive(true);
+                } else {
+                    // set the cell other
+                    landscape[i][j].setAlive(false);
+                }
+            }
+        }
     }
 
     /**
@@ -42,6 +65,12 @@ public class Landscape {
      * in its initial construction.
      */
     public void reset() {
+        // initialize each cell as dead
+        for (int i = 0; i < landscape.length; i++) {
+            for (int j = 0; j < landscape[0].length; j++) {
+                landscape[i][j] = new Cell(false);
+            }
+        }
     }
 
     /**
@@ -59,6 +88,7 @@ public class Landscape {
      * @return the number of columns in the Landscape
      */
     public int getCols() {
+        return landscape[0].length;
     }
 
     /**
@@ -69,12 +99,14 @@ public class Landscape {
      * @return the Cell specified the given row and column
      */
     public Cell getCell(int row, int col) {
+        return landscape[row][col];
     }
 
     /**
      * Returns a String representation of the Landscape.
      */
     public String toString() {
+        return 
     }
 
     /**
