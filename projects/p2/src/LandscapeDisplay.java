@@ -2,6 +2,8 @@
   Originally written by Bruce A. Maxwell a long time ago.
   Updated by Brian Eastwood and Stephanie Taylor more recently
   Updated by Bruce again in Fall 2018
+  Author: Jack Dai
+  last modified: 09/28/2025
 
   Creates a window using the JFrame class.
 
@@ -130,11 +132,5 @@ public class LandscapeDisplay {
 
     public void repaint() {
         this.win.repaint();
-    }
-
-    public static void main(String[] args) throws InterruptedException {
-        Landscape scape = new Landscape(100, 100, .25);
-
-        LandscapeDisplay display = new LandscapeDisplay(scape, 6);
     }
 }

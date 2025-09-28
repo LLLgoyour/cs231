@@ -2,8 +2,8 @@
 file name:      Cell.java
 Authors:        Jack Dai
 last modified:  09/26/2025
-purpose:        This class creates Cell object and the Cell object
-                will represent a location on the Landscape
+purpose:        This class represents a single cell in Conway’s Game of Life.
+                Each cell has a state (alive or dead) and can update based on its neighbors.
 */
 
 import java.util.ArrayList;
@@ -64,13 +64,15 @@ public class Cell {
      */
     public void updateState(ArrayList<Cell> neighbors) {
         int aliveCount = 0;
-        // first check neighboring cells near c
-        for (Cell c : neighbors) {
-            if (c != null && c.getAlive()) {
+        // first check neighboring cells near the cell
+        // count how many neighbors are alive
+        for (Cell neighbor : neighbors) {
+            if (neighbor != null && neighbor.getAlive()) {
                 aliveCount++;
             }
         }
         // then check if the cell is alive
+        // update this cell’s state for the next generation
         boolean nextAlive;
         if (alive) {
             nextAlive = (aliveCount == 2 || aliveCount == 3);
@@ -83,7 +85,7 @@ public class Cell {
     /**
      * Returns a String representation of this Cell.
      * 
-     * @return 1 if this Cell is alive, otherwise 0.
+     * @return "1" if alive, "0" otherwise.
      */
     public String toString() {
         return alive ? "1" : "0";

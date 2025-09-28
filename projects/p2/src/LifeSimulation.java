@@ -1,4 +1,4 @@
-/**
+/*
  * file name: LifeSimulation.java
  * author: Jack Dai
  * last modified: 09/28/2025
@@ -9,6 +9,17 @@
  */
 
 public class LifeSimulation {
+    /**
+     * initializes the simulation parameters,
+     * creates a Landscape and its display, and advances the simulation for
+     * the specified number of steps
+     * 
+     * @param args command line arguments:
+     *             args[0] = number of rows,
+     *             args[1] = number of columns,
+     *             args[2] = number of steps (optional)
+     * @throws InterruptedException
+     */
     public static void main(String[] args) throws InterruptedException {
         // defaults
         int rows = 100;
@@ -24,13 +35,14 @@ public class LifeSimulation {
             cols = Integer.parseInt(args[1]);
         }
         if (args.length >= 3) {
-            step = Integer.parseInt(args[3]);
+            step = Integer.parseInt(args[2]);
         }
 
-        // create a new Landscape
+        // initialize the landscape with the given rows, cols, and alive-cell
+        // probability
         Landscape scape = new Landscape(rows, cols, chance);
 
-        // display the Landscape
+        // create a display window that renders the landscape at the specified scale
         LandscapeDisplay display = new LandscapeDisplay(scape, scale);
 
         // simulation loop

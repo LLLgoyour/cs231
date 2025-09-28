@@ -1,7 +1,9 @@
 /*
 * file name:      Landscape.java
 * Author:         Jack Dai
-* last modified:  09/26/2025
+* last modified:  09/28/2025
+* purpose:        This class manages the 2D grid of Cells for Conway's Game of Life,
+*                 handles initialization, neighbor lookups, simulation updates, and drawing.
 */
 
 import java.awt.Color;
@@ -44,10 +46,11 @@ public class Landscape {
     public Landscape(int rows, int columns, double chance) {
         Random r = new Random();
         landscape = new Cell[rows][columns];
+        this.initialChance = chance;
         reset();
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
-                if (r.nextDouble() < chance) {
+                if (r.nextDouble() < initialChance) {
                     // if a random number is below the probability
                     // then set the cell alive
                     landscape[i][j].setAlive(true);
@@ -62,6 +65,8 @@ public class Landscape {
     /**
      * Recreates the Landscape according to the specifications given
      * in its initial construction.
+     * 
+     * @return nothing
      */
     public void reset() {
         // initialize each cell as dead
@@ -103,6 +108,10 @@ public class Landscape {
 
     /**
      * Returns a String representation of the Landscape.
+     * Each row of cells is separated by a newline,
+     * with 1 for alive and 0 for dead cells.
+     * 
+     * @return the String representation of the Landscape grid
      */
     public String toString() {
         String s = "";
@@ -130,11 +139,11 @@ public class Landscape {
     public ArrayList<Cell> getNeighbors(int row, int col) {
         ArrayList<Cell> neighbors = new ArrayList<Cell>();
         // iterate from -1 to 1
-        // and skip landscape[row][col]
         for (int i = -1; i <= 1; i++) {
             for (int j = -1; j <= 1; j++) {
                 if (i == 0 && j == 0) {
-                    continue; // skip the cell itself
+                    continue; // skip the center cell,
+                              // because a cell is not its own neighbor
                 }
                 int r = row + i;
                 int c = col + j;
@@ -152,13 +161,13 @@ public class Landscape {
      */
     public void advance() {
         // create a temporary Cell grid of the same size
-        Cell[][] tempCell = new Cell[this.getRows()][this.getCols()];
+        Cell[][] tempCells = new Cell[this.getRows()][this.getCols()];
 
         // for each grid location, create a new cell in the temporary grid
         // copy the alive status from the original cell
         for (int i = 0; i < this.getRows(); i++) {
             for (int j = 0; j < this.getCols(); j++) {
-                tempCell[i][j] = new Cell(this.landscape[i][j].getAlive());
+                tempCells[i][j] = new Cell(this.landscape[i][j].getAlive());
             }
         }
 
@@ -170,12 +179,12 @@ public class Landscape {
                 ArrayList<Cell> neighbors = this.getNeighbors(i, j);
 
                 // update the state
-                tempCell[i][j].updateState(neighbors);
+                tempCells[i][j].updateState(neighbors);
             }
         }
 
         // assign the temporary grid back to the original grid field
-        this.landscape = tempCell;
+        this.landscape = tempCells;
 
     }
 
@@ -193,8 +202,5 @@ public class Landscape {
                 g.fillOval(x * scale, y * scale, scale, scale);
             }
         }
-    }
-
-    public static void main(String[] args) {
     }
 }

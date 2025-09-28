@@ -2,6 +2,9 @@
 # Created by https://www.gitignore.io/api/macos,linux,windows,vapor
 /out
 *.zip
+*.mov
+*.mp4
+*.mp3
 ### Linux ###
 *~
 
