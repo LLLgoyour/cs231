@@ -1,8 +1,7 @@
 /*
-file name:      Landscape.java
-Authors:        Jack Dai
-last modified:  09/26/2025
-purpose of this class:  
+* file name:      Landscape.java
+* Author:         Jack Dai
+* last modified:  09/26/2025
 */
 
 import java.awt.Color;
@@ -152,6 +151,32 @@ public class Landscape {
      * Advances the current Landscape by one step.
      */
     public void advance() {
+        // create a temporary Cell grid of the same size
+        Cell[][] tempCell = new Cell[this.getRows()][this.getCols()];
+
+        // for each grid location, create a new cell in the temporary grid
+        // copy the alive status from the original cell
+        for (int i = 0; i < this.getRows(); i++) {
+            for (int j = 0; j < this.getCols(); j++) {
+                tempCell[i][j] = new Cell(this.landscape[i][j].getAlive());
+            }
+        }
+
+        // go through each cell and update its state
+        // based on the neighbors
+        for (int i = 0; i < this.getRows(); i++) {
+            for (int j = 0; j < this.getCols(); j++) {
+                // get the neighbors
+                ArrayList<Cell> neighbors = this.getNeighbors(i, j);
+
+                // update the state
+                tempCell[i][j].updateState(neighbors);
+            }
+        }
+
+        // assign the temporary grid back to the original grid field
+        this.landscape = tempCell;
+
     }
 
     /**

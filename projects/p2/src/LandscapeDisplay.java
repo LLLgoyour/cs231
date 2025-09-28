@@ -32,6 +32,7 @@ import javax.swing.JPanel;
  * contains a grid which can be displayed at any scale factor.
  * 
  * @author bseastwo
+ *
  */
 public class LandscapeDisplay {
     JFrame win;
@@ -135,12 +136,5 @@ public class LandscapeDisplay {
         Landscape scape = new Landscape(100, 100, .25);
 
         LandscapeDisplay display = new LandscapeDisplay(scape, 6);
-
-        // Uncomment below when advance() has been finished
-        // while (true) {
-        // Thread.sleep(10);
-        // scape.advance();
-        // display.repaint();
-        // }
     }
 }
