@@ -8,6 +8,8 @@
  * through LandscapeDisplay
  */
 
+import java.util.Random;
+
 public class LifeSimulation {
     /**
      * initializes the simulation parameters,
@@ -20,11 +22,12 @@ public class LifeSimulation {
      *             args[2] = number of steps (optional)
      * @throws InterruptedException
      */
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
         // defaults
+        Random r = new Random();
         int rows = 100;
         int cols = 100;
-        double chance = 0.25;
+        double chance = r.nextDouble();
         int step = 1000; // how many time steps to run
         int delay = 250; // delay in ms between steps
         int scale = 6; // cell's pixel size
@@ -43,13 +46,6 @@ public class LifeSimulation {
         Landscape scape = new Landscape(rows, cols, chance);
 
         // create a display window that renders the landscape at the specified scale
-        LandscapeDisplay display = new LandscapeDisplay(scape, scale);
-
-        // simulation loop
-        for (int t = 0; t < step; t++) {
-            Thread.sleep(delay);
-            scape.advance();
-            display.repaint();
-        }
+        new LandscapeDisplay(scape, scale);
     }
 }

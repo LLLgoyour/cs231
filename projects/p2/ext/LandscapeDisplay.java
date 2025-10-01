@@ -3,11 +3,13 @@
   Updated by Brian Eastwood and Stephanie Taylor more recently
   Updated by Bruce again in Fall 2018
   Author: Jack Dai
-  last modified: 09/28/2025
+  last modified: 09/30/2025
 
   Creates a window using the JFrame class.
 
   Creates a drawable area in the window using the JPanel class.
+
+  Contains buttons that adjust values in Landscape class.
 
   The JPanel calls the Landscape's draw method to fill in content, so the
   Landscape class needs a draw method.
@@ -24,10 +26,15 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Random;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JSlider;
+import javax.swing.JButton;
+import javax.swing.Timer;
 
 /**
  * Displays a Landscape graphically using Swing. The Landscape
@@ -41,6 +48,7 @@ public class LandscapeDisplay {
     protected Landscape scape;
     private LandscapePanel canvas;
     private int gridScale; // width (and height) of each square in the grid
+    private Timer timer;
 
     /**
      * Initializes a display window for a Landscape.
@@ -50,6 +58,7 @@ public class LandscapeDisplay {
      */
     public LandscapeDisplay(Landscape scape, int scale) {
         // setup the window
+        JPanel controls = new JPanel();
         this.win = new JFrame("Game of Life");
         this.win.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -61,10 +70,50 @@ public class LandscapeDisplay {
         this.canvas = new LandscapePanel((int) (this.scape.getCols() + 4) * this.gridScale,
                 (int) (this.scape.getRows() + 4) * this.gridScale);
 
+        // add buttons
+        JButton startButton = new JButton("Start");
+        JButton stopButton = new JButton("Stop");
+        JButton resetButton = new JButton("Reset");
+
+        // Add buttons to control panel
+        controls.add(startButton);
+        controls.add(stopButton);
+        controls.add(resetButton);
+
         // add the panel to the window, layout, and display
         this.win.add(this.canvas, BorderLayout.CENTER);
         this.win.pack();
         this.win.setVisible(true);
+        this.win.add(controls, BorderLayout.SOUTH);
+
+        int delay = 250; // in ms
+        timer = new Timer(delay, e -> {
+            scape.advance();
+            repaint();
+        });
+
+        startButton.addActionListener(e -> timer.start());
+        stopButton.addActionListener(e -> timer.stop());
+
+        // add the reset slider to the botton of the frame
+        JSlider densitySlider = new JSlider(0, 100, 25); // % alive
+        densitySlider.setMajorTickSpacing(25);
+        densitySlider.setPaintTicks(true);
+        densitySlider.setPaintLabels(true);
+
+        controls.add(new JLabel("Density:"));
+        controls.add(densitySlider);
+        resetButton.addActionListener(e -> {
+            // stop the simulation first
+            timer.stop();
+
+            double density = densitySlider.getValue() / 100.0;
+            scape.initialize(density); // re-randomize with (density) % alive cells
+            repaint();
+        });
+        // use pack() for proper sizing
+        // for buttons and reset slider
+        this.win.pack();
     }
 
     /**

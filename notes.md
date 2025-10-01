@@ -99,3 +99,33 @@ public class LinkedList {
     private Node tail;
 }
 ```
+
+## week 4
+
+### 9/29
+
+#### LinkedList vs ArrayList
+
+##### time complexity for ArrayList vs LinkedList
+
+|            | Add first | remove first | search | access |
+| ---------- | --------- | ------------ | ------ | ------ |
+| Array      | n         | n            | n      | 1      |
+| ArrayList  | n         | n            | n      | 1      |
+| LinkedList | 1         | 1            | n      | n      |
+
+##### Add first to a LinkedList
+
+```java
+public void addFirst(int newData) {
+    Node newNode = new Node(newData);
+    if (this.head = null) {
+        // empty list
+        this.head = newNode;
+        this.tail = newNode;
+    } else {
+        newNode.next = this.head;
+        this.head = newNode;
+    }
+}
+```

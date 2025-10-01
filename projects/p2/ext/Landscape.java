@@ -78,6 +78,32 @@ public class Landscape {
     }
 
     /**
+     * Initializes the Landscape by setting each Cell alive
+     * with the given probability (density of the cells). First resets the Landscape
+     * so all cells start as dead.
+     *
+     * @param density the probability (0.0–1.0) that each Cell is alive
+     */
+    public void initialize(double density) {
+        if (density < 0.0) {
+            density = 0.0;
+        }
+        if (density > 1.0) {
+            density = 1.0;
+        }
+        Random r = new Random();
+        reset();
+        for (int i = 0; i < getRows(); i++) {
+            for (int j = 0; j < getCols(); j++) {
+                if (r.nextDouble() < density) {
+                    landscape[i][j].setAlive(true);
+                }
+            }
+        }
+        this.initialChance = density; // store the chosen density
+    }
+
+    /**
      * Returns the number of rows in the Landscape.
      * 
      * @return the number of rows in the Landscape
