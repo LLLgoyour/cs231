@@ -1,7 +1,7 @@
 /*
  * file name: LifeSimulation.java
  * author: Jack Dai
- * last modified: 09/30/2025
+ * last modified: 10/01/2025
  * 
  * This class drives the simulation of the Conway's Game of Life
  * by advancing a Landscape object and display it
@@ -27,9 +27,11 @@ public class LifeSimulation {
         // defaults
         int rows = 100;
         int cols = 100;
-        // double chance = 0.25; // default
+        // double chance = 0.25; // default, and change chance
+        // to 0.1, 0.2, 0.3, ... , 0.9
+        // and explore the
         double chance = r.nextDouble(); // exploration data
-        int step = 1000; // how many time steps to run
+        int steps = 1000; // how many time steps to run
         int delay = 250; // delay in ms between steps
         int scale = 6; // cell's pixel size
 
@@ -39,7 +41,7 @@ public class LifeSimulation {
             cols = Integer.parseInt(args[1]);
         }
         if (args.length >= 3) {
-            step = Integer.parseInt(args[2]);
+            steps = Integer.parseInt(args[2]);
         }
 
         // initialize the landscape with the given rows, cols, and alive-cell
@@ -50,9 +52,9 @@ public class LifeSimulation {
         LandscapeDisplay display = new LandscapeDisplay(scape, scale);
 
         // simulation loop
-        for (int t = 0; t < step; t++) {
-            // Thread.sleep(delay);
-            scape.advance(); // for exploration convenience, skipped sleep(delay)
+        for (int t = 0; t < steps; t++) {
+            Thread.sleep(delay); // for exploration convenience, skipped sleep(delay)
+            scape.advance();
             display.repaint();
         }
     }

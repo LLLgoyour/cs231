@@ -3,7 +3,7 @@
   Updated by Brian Eastwood and Stephanie Taylor more recently
   Updated by Bruce again in Fall 2018
   Author: Jack Dai
-  last modified: 09/30/2025
+  last modified: 10/01/2025
 
   Creates a window using the JFrame class.
 
@@ -26,7 +26,6 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.Random;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
@@ -48,7 +47,7 @@ public class LandscapeDisplay {
     protected Landscape scape;
     private LandscapePanel canvas;
     private int gridScale; // width (and height) of each square in the grid
-    private Timer timer;
+    private Timer timer; // Timer to repeatedly advance simulation
 
     /**
      * Initializes a display window for a Landscape.
@@ -87,15 +86,18 @@ public class LandscapeDisplay {
         this.win.add(controls, BorderLayout.SOUTH);
 
         int delay = 250; // in ms
+        // Timer repeatedly advances the simulation and repaints
         timer = new Timer(delay, e -> {
-            scape.advance();
-            repaint();
+            scape.advance(); // advance the simulation by one step
+            repaint(); // update the display
         });
 
+        // Start button starts the timer (simulation runs)
         startButton.addActionListener(e -> timer.start());
+        // Stop button stops the timer (simulation pauses)
         stopButton.addActionListener(e -> timer.stop());
 
-        // add the reset slider to the botton of the frame
+        // add the reset slider to the bottom of the frame
         JSlider densitySlider = new JSlider(0, 100, 25); // % alive
         densitySlider.setMajorTickSpacing(25);
         densitySlider.setPaintTicks(true);
@@ -103,16 +105,18 @@ public class LandscapeDisplay {
 
         controls.add(new JLabel("Density:"));
         controls.add(densitySlider);
+
+        // Reset button reinitializes the Landscape according to slider density
         resetButton.addActionListener(e -> {
-            // stop the simulation first
-            timer.stop();
+            timer.stop(); // stop simulation when reset is clicked
 
             double density = densitySlider.getValue() / 100.0;
             scape.initialize(density); // re-randomize with (density) % alive cells
-            repaint();
+            repaint(); // redraw the updated landscape
+            // simulation will remain stopped until Start is clicked
         });
-        // use pack() for proper sizing
-        // for buttons and reset slider
+
+        // use pack() for proper sizing of window with buttons and slider
         this.win.pack();
     }
 
@@ -165,7 +169,7 @@ public class LandscapeDisplay {
         /**
          * Method overridden from JComponent that is responsible for
          * drawing components on the screen. The supplied Graphics
-         * object is used to draw.
+         * object is used to draw
          * 
          * @param g the Graphics object used for drawing
          */
@@ -179,6 +183,7 @@ public class LandscapeDisplay {
 
     } // end LandscapePanel
 
+    // Repaints the entire window
     public void repaint() {
         this.win.repaint();
     }
