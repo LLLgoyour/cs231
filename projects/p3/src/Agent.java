@@ -100,16 +100,12 @@ abstract class Agent {
      * 
      * @param scape
      */
-    public abstract void updateState( Landscape scape ) {
-
-    }
+    public abstract void updateState(Landscape scape);
 
     /**
      * does nothing, for now.
      * 
      * @param g
      */
-    public abstract void draw(Graphics g){
-
-    }
+    public abstract void draw(Graphics g);
 }

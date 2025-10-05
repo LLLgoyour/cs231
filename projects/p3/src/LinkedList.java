@@ -71,6 +71,22 @@ public class LinkedList<T> {
 
     /**
      * 
+     * @return the first element of the list, or null if empty.
+     */
+    public T removeFirst() {
+        if (this.head == null) {
+            return null;
+        }
+        T data = this.head.data;
+        this.head = this.head.next;
+        if (this.head == null) {
+            this.tail = null;
+        }
+        return data;
+    }
+
+    /**
+     * 
      * @return the head node
      */
     public Node getHead() {

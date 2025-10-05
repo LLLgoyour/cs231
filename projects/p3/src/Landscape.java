@@ -7,6 +7,7 @@
 */
 
 import java.awt.Graphics;
+import java.util.Random;
 
 public class Landscape {
     private int w;
@@ -85,12 +86,74 @@ public class Landscape {
         return neighbors;
     }
 
+    public int updateAgents() {
+        // if there are no agents, nothing to do
+        if (this.agents.getHead() == null) {
+            return 0;
+        }
+
+        Random r = new Random();
+
+        // find a random index within the list
+        int numAgents = this.agents.size();
+        int randIdx = r.nextInt(numAgents);
+
+        // traverse to that index
+        LinkedList<Agent>.Node current = this.agents.getHead();
+        LinkedList<Agent>.Node prev = null;
+        int i = 0;
+        while (current != null && i < randIdx) {
+            prev = current;
+            current = current.next;
+            i++;
+        }
+
+        // store values of x, y, and radius before deleting
+        double x = current.data.getX();
+        double y = current.data.getY();
+        int rad = current.data.getRadius();
+
+        // remove the chosen agent from the list
+        if (prev == null) {
+            // remove the head
+            this.agents.removeFirst();
+        } else {
+            prev.next = current.next;
+            if (current.next == null) {
+                // removed the tail
+                // update tail pointer if we
+                // ever track it internally
+            }
+        }
+
+        // create replacement AntiSocialAgent
+        AntiSocialAgent newAgent = new AntiSocialAgent(x, y, rad);
+        this.agents.addFirst(newAgent);
+
+        // update all agents and count how many moved
+        int movedCount = 0;
+        LinkedList<Agent>.Node node = this.agents.getHead();
+        while (node != null) {
+            node.data.updateState(this);
+            if (node.data.getMoved()) {
+                movedCount++;
+            }
+            node = node.next;
+        }
+        return movedCount;
+    }
+
     /**
      * Calls the draw method of all the agents on the Landscape.
      * 
      * @param g
      */
     public void draw(Graphics g) {
+        // if g is null (like during testing), skip drawing
+        if (g == null) {
+            return;
+        }
+
         LinkedList<Agent>.Node current = this.agents.getHead();
         while (current != null) {
             current.data.draw(g);
