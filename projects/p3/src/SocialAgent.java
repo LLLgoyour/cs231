@@ -6,17 +6,20 @@
  * TODO
  */
 
-public class SocialAgent {
+import java.awt.Graphics;
+import java.awt.Color;
+
+public class SocialAgent extends Agent {
     /**
      * calls the super class constructor and sets the radius field.
      * 
-     * @param x0
-     * @param y0
-     * @param radius
+     * @param x0     the x position
+     * @param y0     the y position
+     * @param radius the radius of interaction
      */
     public SocialAgent(double x0, double y0, int radius) {
-        super(x0, y0, radius);
-        // remainder of constructor code
+        super(x0, y0, radius); // sets x, y, and radius in Agent
+        this.moved = false;
     }
 
     /**
@@ -27,11 +30,11 @@ public class SocialAgent {
      * @param g
      */
     public void draw(Graphics g) {
-        if (!moved)
+        if (!moved) {
             g.setColor(new Color(0, 0, 255));
-        else
+        } else {
             g.setColor(new Color(125, 125, 255));
-
+        }
         g.fillOval((int) getX(), (int) getY(), 5, 5);
     }
 
@@ -41,6 +44,5 @@ public class SocialAgent {
      * @param scape
      */
     public void updateState(Landscape scape) {
-
     }
 }

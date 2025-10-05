@@ -6,17 +6,20 @@
 * TODO
 */
 
-public class AntiSocialAgent {
+import java.awt.Graphics;
+import java.awt.Color;
+
+public class AntiSocialAgent extends Agent {
     /**
      * calls the super class constructor and sets the radius field.
      * 
-     * @param x0
-     * @param y0
-     * @param radius
+     * @param x0     the x position
+     * @param y0     the y position
+     * @param radius the radius of interaction
      */
     public AntiSocialAgent(double x0, double y0, int radius) {
         super(x0, y0, radius);
-        // remainder of constructor code
+        this.moved = false;
     }
 
     /**

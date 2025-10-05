@@ -6,6 +6,8 @@ last modified:  10/02/2025
 How to run:     java -ea AgentTests
 */
 
+import java.lang.reflect.Field;
+
 public class AgentTests {
 
     public static double agentTests() {
@@ -16,6 +18,7 @@ public class AgentTests {
         // double , double , int )
         {
             // TODO
+
         }
 
         // case 2: testing getX() for both SocialAgent and AntiSocialAgent

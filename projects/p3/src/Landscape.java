@@ -6,18 +6,24 @@
 * TODO
 */
 
-import java.util.LinkedList;
+import java.awt.Graphics;
 
 public class Landscape {
+    private int w;
+    private int h;
+    private LinkedList<Agent> agents;
+
     /**
      * a constructor that sets the width and height fields, and initializes the
      * agent list.
      * 
-     * @param w
-     * @param h
+     * @param w the width fields
+     * @param h the height fields
      */
     public Landscape(int w, int h) {
-
+        this.w = w;
+        this.h = h;
+        this.agents = new LinkedList<Agent>();
     }
 
     /**
@@ -25,7 +31,7 @@ public class Landscape {
      * @return the height.
      */
     public int getHeight() {
-
+        return this.h;
     }
 
     /**
@@ -33,7 +39,7 @@ public class Landscape {
      * @return the width.
      */
     public int getWidth() {
-
+        return this.w;
     }
 
     /**
@@ -42,6 +48,7 @@ public class Landscape {
      * @param a
      */
     public void addAgent(Agent a) {
+        this.agents.addFirst(a);
 
     }
 
@@ -50,7 +57,7 @@ public class Landscape {
      *         indicating the number of Agents on the Landscape.
      */
     public String toString() {
-
+        return "Landscape with " + this.agents.size() + " agents.";
     }
 
     /**
@@ -61,7 +68,21 @@ public class Landscape {
      * @return a list of the Agents within radius distance of the location x0, y0.
      */
     public LinkedList<Agent> getNeighbors(double x0, double y0, double radius) {
+        LinkedList<Agent> neighbors = new LinkedList<Agent>();
+        LinkedList<Agent>.Node current = this.agents.getHead();
 
+        while (current != null) {
+            Agent a = current.data;
+            double dx = a.getX() - x0;
+            double dy = a.getY() - y0;
+            double dist = Math.sqrt(dx * dx + dy * dy);
+
+            if (dist <= radius && dist > 0) {
+                neighbors.addFirst(a);
+            }
+            current = current.next;
+        }
+        return neighbors;
     }
 
     /**
@@ -70,6 +91,10 @@ public class Landscape {
      * @param g
      */
     public void draw(Graphics g) {
-
+        LinkedList<Agent>.Node current = this.agents.getHead();
+        while (current != null) {
+            current.data.draw(g);
+            current = current.next;
+        }
     }
 }

@@ -1,19 +1,32 @@
 /*
- * file name: Agents.java
+ * file name: Agent.java
  * author: Jack Dai
  * last modified: 10/02/2025
  * purpose of the class:
  * TODO
  */
 
-abstract class Agents {
-    /**
-     * a constructor that sets the position.
-     * @param g
-     */
-    public Agent
-    {
+import java.awt.Graphics;
+import java.awt.Color;
 
+abstract class Agent {
+    private double x0;
+    private double y0;
+    protected int radius;
+    protected boolean moved;
+
+    /**
+     * Constructor that sets the position.
+     * 
+     * @param x0
+     * @param y0
+     * @param radius
+     */
+    public Agent(double x0, double y0, int radius) {
+        this.x0 = x0;
+        this.y0 = y0;
+        this.radius = radius;
+        this.moved = false;
     }
 
     /**
@@ -21,7 +34,7 @@ abstract class Agents {
      * @return the x position.
      */
     public double getX() {
-
+        return this.x0;
     }
 
     /**
@@ -29,23 +42,23 @@ abstract class Agents {
      * @return the y position.
      */
     public double getY() {
-
+        return this.y0;
     }
 
     /**
      * 
-     * @return returns the radius.
+     * @return the radius.
      */
     public int getRadius() {
-
+        return this.radius;
     }
 
     /**
      * 
-     * @return the moved field.
+     * @return whether the agent moved.
      */
     public boolean getMoved() {
-
+        return this.moved;
     }
 
     /**
@@ -54,7 +67,7 @@ abstract class Agents {
      * @param newX
      */
     public void setX(double newX) {
-
+        this.x0 = newX;
     }
 
     /**
@@ -63,7 +76,7 @@ abstract class Agents {
      * @param newY
      */
     public void setY(double newY) {
-
+        this.y0 = newY;
     }
 
     /**
@@ -72,14 +85,14 @@ abstract class Agents {
      * @param newRadius
      */
     public void setRadius(int newRadius) {
-
+        this.radius = newRadius;
     }
 
     /**
      * @return a String containing the x and y positions, e.g. "(3.024, 4.245)".
      */
     public String toString() {
-
+        return String.format("(%.3f, %.3f)", this.x0, this.y0);
     }
 
     /**
@@ -87,16 +100,16 @@ abstract class Agents {
      * 
      * @param scape
      */
-    // public abstract void updateState( Landscape scape ) {
+    public abstract void updateState( Landscape scape ) {
 
-    // }
+    }
 
     /**
      * does nothing, for now.
      * 
      * @param g
      */
-    // public abstract void draw(Graphics g){
+    public abstract void draw(Graphics g){
 
-    // }
+    }
 }
