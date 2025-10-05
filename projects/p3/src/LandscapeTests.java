@@ -1,12 +1,10 @@
 /*
 file name:      LandscapeTests.java
 Authors:        Ike Lage & Jack Dai
-last modified:  10/02/2025
+last modified:  10/05/2025
 
 How to run:     java -ea LandscapeTests
 */
-
-import java.util.*;
 
 public class LandscapeTests {
 

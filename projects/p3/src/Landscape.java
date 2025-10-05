@@ -1,9 +1,11 @@
 /*
 * file name: Landscape.java
 * author: Jack Dai
-* last modified: 10/02/2025
+* last modified: 10/05/2025
 * purpose of this class:
-* TODO
+* Represents the 2D environment that holds and manages all agents.
+* It stores agents in a linked list, finds nearby neighbors, updates
+* agent states each step, and draws them on the screen.
 */
 
 import java.awt.Graphics;
@@ -100,31 +102,20 @@ public class Landscape {
 
         // traverse to that index
         LinkedList<Agent>.Node current = this.agents.getHead();
-        LinkedList<Agent>.Node prev = null;
         int i = 0;
         while (current != null && i < randIdx) {
-            prev = current;
             current = current.next;
             i++;
         }
 
         // store values of x, y, and radius before deleting
-        double x = current.data.getX();
-        double y = current.data.getY();
-        int rad = current.data.getRadius();
+        Agent removedAgent = current.data;
+        double x = removedAgent.getX();
+        double y = removedAgent.getY();
+        int rad = removedAgent.getRadius();
 
         // remove the chosen agent from the list
-        if (prev == null) {
-            // remove the head
-            this.agents.removeFirst();
-        } else {
-            prev.next = current.next;
-            if (current.next == null) {
-                // removed the tail
-                // update tail pointer if we
-                // ever track it internally
-            }
-        }
+        this.agents.remove(removedAgent);
 
         // create replacement AntiSocialAgent
         AntiSocialAgent newAgent = new AntiSocialAgent(x, y, rad);

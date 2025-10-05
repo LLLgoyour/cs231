@@ -1,9 +1,9 @@
 /*
  * file name: LinkedList.java
  * author: Jack Dai
- * last modified: 10/02/2025
+ * last modified: 10/05/2025
  * purpose of this class:
- * A generic singly linked list implementation that supports any data type (T)
+ * A linked list implementation that supports any data type (T)
  */
 
 public class LinkedList<T> {

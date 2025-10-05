@@ -1,13 +1,15 @@
 /*
  * file name: Agent.java
  * author: Jack Dai
- * last modified: 10/02/2025
+ * last modified: 10/05/2025
  * purpose of the class:
- * TODO
+ * Defines a base class for all agents in the simulation, storing their
+ * position, interaction radius, and movement state. Subclasses like
+ * SocialAgent and AntiSocialAgent implement specific behaviors for
+ * updating and drawing the agents.
  */
 
 import java.awt.Graphics;
-import java.awt.Color;
 
 abstract class Agent {
     private double x0;

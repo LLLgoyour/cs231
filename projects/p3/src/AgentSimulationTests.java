@@ -1,7 +1,7 @@
 /*
 file name:      AgentSimulationTests.java
-Authors:        Ike Lage
-last modified:  03/04/2025
+Authors:        Ike Lage & Jack Dai
+last modified:  10/05/2025
 
 How to run:     java -ea AgentSimulationTests
 */

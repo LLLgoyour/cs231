@@ -1,7 +1,7 @@
 /*
  * file name: AgentSimulation.java
  * author: Jack Dai
- * last modified: 10/02/2025
+ * last modified: 10/05/2025
  * purpose of the class:
  * Runs an agent-based simulation where SocialAgents and AntiSocialAgents
  * interact on a Landscape.
@@ -33,7 +33,7 @@ public class AgentSimulation {
         }
 
         // Create the display window for visualization
-        LandscapeDisplay display = new LandscapeDisplay(scape, 8);
+        LandscapeDisplay display = new LandscapeDisplay(scape);
 
         // Initialize counters
         int moved = 1; // non-zero so loop starts
@@ -57,7 +57,7 @@ public class AgentSimulation {
     }
 
     /**
-     * Main entry point. Runs simulation with N from command line.
+     * Runs simulation with N from command line.
      */
     public static void main(String[] args) {
         int N = 50; // default
