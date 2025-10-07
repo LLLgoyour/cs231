@@ -140,11 +140,10 @@ public class LandscapeDisplay {
 
         LandscapeDisplay display = new LandscapeDisplay(scape);
 
-        // Uncomment below when updateAgents() has been implemented
-        // while(true){
-        // Thread.sleep(10);
-        // scape.updateAgents();
-        // display.repaint();
-        // }
+        while (true) {
+            Thread.sleep(10);
+            scape.updateAgents();
+            display.repaint();
+        }
     }
 }

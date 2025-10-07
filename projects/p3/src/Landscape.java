@@ -72,7 +72,7 @@ public class Landscape {
      */
     public LinkedList<Agent> getNeighbors(double x0, double y0, double radius) {
         LinkedList<Agent> neighbors = new LinkedList<Agent>();
-        LinkedList<Agent>.Node current = this.agents.getHead();
+        LinkedList<Agent>.Node<Agent> current = this.agents.getHead();
 
         while (current != null) {
             Agent a = current.data;
@@ -101,7 +101,7 @@ public class Landscape {
         int randIdx = r.nextInt(numAgents);
 
         // traverse to that index
-        LinkedList<Agent>.Node current = this.agents.getHead();
+        LinkedList<Agent>.Node<Agent> current = this.agents.getHead();
         int i = 0;
         while (current != null && i < randIdx) {
             current = current.next;
@@ -123,7 +123,7 @@ public class Landscape {
 
         // update all agents and count how many moved
         int movedCount = 0;
-        LinkedList<Agent>.Node node = this.agents.getHead();
+        LinkedList<Agent>.Node<Agent> node = this.agents.getHead();
         while (node != null) {
             node.data.updateState(this);
             if (node.data.getMoved()) {
@@ -145,7 +145,7 @@ public class Landscape {
             return;
         }
 
-        LinkedList<Agent>.Node current = this.agents.getHead();
+        LinkedList<Agent>.Node<Agent> current = this.agents.getHead();
         while (current != null) {
             current.data.draw(g);
             current = current.next;
