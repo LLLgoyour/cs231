@@ -169,4 +169,13 @@ public class Landscape {
             current = current.getNext();
         }
     }
+
+    /**
+     * Gets the agents list for extension experimental analysis purposes.
+     * 
+     * @return the LinkedList of agents
+     */
+    public LinkedList<Agent> getAgents() {
+        return this.agents;
+    }
 }

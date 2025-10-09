@@ -9,7 +9,7 @@
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class LinkedList<T> implements Iterable<T> {
+public class LinkedList<T> implements Iterable<T>, Queue<T> {
 
     /**
      * Node inner class
@@ -139,6 +139,7 @@ public class LinkedList<T> implements Iterable<T> {
         if (this.head == null) {
             this.tail = null;
         }
+        this.size--;
         return data;
     }
 
@@ -158,8 +159,13 @@ public class LinkedList<T> implements Iterable<T> {
      */
     public void add(T item) {
         Node<T> newNode = new Node<T>(item);
-        newNode.setNext(head);
-        head = newNode;
+        if (head == null) {
+            head = newNode;
+            tail = newNode;
+        } else {
+            newNode.setNext(head);
+            head = newNode;
+        }
         size++;
     }
 

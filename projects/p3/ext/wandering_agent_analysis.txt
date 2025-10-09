@@ -1,0 +1,12 @@
+WanderingAgent Simulation
+
+Social	AntiSocial	Wandering	Iterations	Notes
+------	----------	---------	----------	-----
+30	0		0		188		Pure social clustering
+25	0		5		151		Mixed with exploration
+20	0		10		332		Mixed with exploration
+15	0		15		116		Mixed with exploration
+0	30		0		1		Pure anti-social spreading
+0	25		5		61		Mixed with exploration
+15	15		0		96		Pure social clustering
+10	10		10		114		Mixed with exploration
