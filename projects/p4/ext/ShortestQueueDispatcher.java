@@ -23,7 +23,7 @@ public class ShortestQueueDispatcher extends JobDispatcher {
     /**
      * Choose a server for the given Job according to the shortest-queue rule.
      *
-     * @param j the Job to dispatch
+     * @param j the Job to dispatch (not modified)
      * @return the Server whose queue currently has the fewest jobs
      */
     @Override

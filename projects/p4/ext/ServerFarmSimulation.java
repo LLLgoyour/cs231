@@ -18,7 +18,8 @@ public class ServerFarmSimulation {
         int numServers = 4; // Numbers of servers in the farm
         int numJobs = 10; // Number of jobs to process
         boolean showViz = true; // Set to true to see the visualization, and false to run your experiments
-        // to speed up the display, you can decrease the sleep time in the ServerFarmViz class.
+        // to speed up the display, you can decrease the sleep time in the ServerFarmViz
+        // class.
 
         // Main experiment settings
         /**

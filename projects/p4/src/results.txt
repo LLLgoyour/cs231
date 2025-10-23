@@ -1,0 +1,9 @@
+Experiment: meanArrivalTime=3, meanProcessingTime=100
+Servers=34, Jobs=10000000
+
+Dispatcher   | AvgWaitTime      | Servers  | Jobs      
+---------------------------------------------------------
+random       | 5084.0653        | 34       | 10000000  
+round        | 2837.0008        | 34       | 10000000  
+shortest     | 274.4699         | 34       | 10000000  
+least        | 233.8240         | 34       | 10000000  

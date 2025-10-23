@@ -1,3 +1,5 @@
+import java.util.*;
+
 /*
  * file name: RandomDispatcher.java
  * author: Jack Dai
@@ -7,8 +9,6 @@
  * Job. The implementation uses a fixed seed (0) so behavior is deterministic
  * for tests.
  */
-
-import java.util.*;
 
 public class RandomDispatcher extends JobDispatcher {
 
