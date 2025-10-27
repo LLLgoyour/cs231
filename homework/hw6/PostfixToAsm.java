@@ -45,7 +45,7 @@ public class PostfixToAsm {
         tmpId = 0;
         // use Stack (LIFO) to evaluate postfix expressions
         Stack<String> st = new Stack<>();
-        String[] toks = postfix.trim().split("\\s+");
+        String[] toks = postfix.trim().split("\\s+"); // multiple arbitrary null character
         for (String t : toks) {
             if (t.equals("+") || t.equals("-") || t.equals("*") || t.equals("/")) {
                 String right = st.pop();

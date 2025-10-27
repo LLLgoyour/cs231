@@ -7,6 +7,7 @@
  */
 
 import java.io.*;
+import java.util.*;
 
 public class Board {
     /** Board size (rows and columns). */
@@ -41,6 +42,61 @@ public class Board {
         read(filename);
     }
 
+    public Board(int numFixed) {
+        // validate parameter
+        if (numFixed < 0 || numFixed > SIZE * SIZE) {
+            throw new IllegalArgumentException("numFixed must be between 0 and " + (SIZE * SIZE));
+        }
+
+        // create empty board first
+        this.cells = new Cell[SIZE][SIZE];
+        for (int r = 0; r < SIZE; r++) {
+            for (int c = 0; c < SIZE; c++) {
+                this.cells[r][c] = new Cell(r, c, 0, false);
+            }
+        }
+
+        // randomly place `numFixed` locked cells with valid values
+        Random rand = new Random();
+        int placed = 0;
+        // guard against pathological cases by attempting until placed or many tries
+        int attempts = 0;
+        while (placed < numFixed && attempts < numFixed * 1000) {
+            attempts++;
+            int r = rand.nextInt(SIZE);
+            int c = rand.nextInt(SIZE);
+            if (cells[r][c].isLocked())
+                continue; // already filled
+
+            // try values 1..9 in random order
+            List<Integer> vals = new ArrayList<>();
+            for (int v = 1; v <= SIZE; v++)
+                vals.add(v);
+            Collections.shuffle(vals, rand);
+
+            boolean placedHere = false;
+            for (int v : vals) {
+                if (validValue(r, c, v)) {
+                    cells[r][c].setValue(v);
+                    cells[r][c].setLocked(true);
+                    placed++;
+                    placedHere = true;
+                    break;
+                }
+            }
+
+            // if no valid value found for this cell, try another cell
+            if (!placedHere)
+                continue;
+        }
+
+        if (placed < numFixed) {
+            // couldn't place requested number (very unlikely unless impossible request)
+            throw new RuntimeException(
+                    "Unable to place " + numFixed + " locked cells after many attempts; placed " + placed);
+        }
+    }
+
     /**
      * Get the Cell at the specified row and column.
      *
@@ -65,6 +121,13 @@ public class Board {
     public void set(int row, int col, int value) {
         checkIndices(row, col);
         cells[row][col].setValue(value);
+    }
+
+    /** Set both value and locked state on the cell at (row,col). */
+    public void set(int row, int col, int value, boolean locked) {
+        checkIndices(row, col);
+        cells[row][col].setValue(value);
+        cells[row][col].setLocked(locked);
     }
 
     /**
@@ -150,6 +213,103 @@ public class Board {
         return false;
     }
 
+    /* Board accessors and utilities requested by the assignment */
+
+    public int getCols() {
+        return SIZE;
+    }
+
+    public int getRows() {
+        return SIZE;
+    }
+
+    public boolean isLocked(int r, int c) {
+        checkIndices(r, c);
+        return cells[r][c].isLocked();
+    }
+
+    public int numLocked() {
+        int cnt = 0;
+        for (int r = 0; r < SIZE; r++) {
+            for (int c = 0; c < SIZE; c++) {
+                if (cells[r][c].isLocked())
+                    cnt++;
+            }
+        }
+        return cnt;
+    }
+
+    public int value(int r, int c) {
+        checkIndices(r, c);
+        return cells[r][c].getValue();
+    }
+
+    /**
+     * tests if the given value is a valid value at the given row and column of the
+     * board
+     * It should make sure the value is unique in its row, in its column, and in its
+     * local 3x3 square.
+     * 
+     * @param row
+     * @param col
+     * @param value
+     * @return
+     */
+    public boolean validValue(int row, int col, int value) {
+        // value must be between 1 and SIZE (inclusive)
+        if (value < 1 || value > SIZE)
+            return false;
+
+        checkIndices(row, col);
+
+        // Check row uniqueness (ignore the cell at col)
+        for (int c = 0; c < SIZE; c++) {
+            if (c == col)
+                continue;
+            if (cells[row][c].getValue() == value)
+                return false;
+        }
+
+        // Check column uniqueness (ignore the cell at row)
+        for (int r = 0; r < SIZE; r++) {
+            if (r == row)
+                continue;
+            if (cells[r][col].getValue() == value)
+                return false;
+        }
+
+        // Check 3x3 block
+        int br = (row / 3) * 3;
+        int bc = (col / 3) * 3;
+        for (int r = br; r < br + 3; r++) {
+            for (int c = bc; c < bc + 3; c++) {
+                if (r == row && c == col)
+                    continue;
+                if (cells[r][c].getValue() == value)
+                    return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * 
+     * @return
+     */
+    public boolean validSolution() {
+        for (int r = 0; r < SIZE; r++) {
+            for (int c = 0; c < SIZE; c++) {
+                int v = cells[r][c].getValue();
+                if (v < 1 || v > SIZE)
+                    return false;
+                if (!validValue(r, c, v))
+                    return false;
+            }
+        }
+        return true;
+    }
+
     /**
      * Simple entry point that loads a board from a file (defaults to "board1.txt")
      * so you can observe the debug output from Board.read(String).
@@ -159,6 +319,8 @@ public class Board {
         Board b = new Board(filename); // constructor calls read(filename), which prints debug info
         // After reading, print the board in a format matching the input file
         System.out.println(b.toString());
+        // tell whether the board read from file is solved
+        System.out.println("Solved? " + b.validSolution());
     }
 
     /** Ensure row and col are within 0..8. */
