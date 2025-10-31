@@ -1,15 +1,17 @@
 /*
  * file name: Board.java
  * author: Jack Dai
- * last modified: 10/23/2025
+ * last modified: 10/26/2025
  * purpose of the class:
- * 
+ * The Board class holds the array of Cells that make up the Sudoku board. 
  */
 
 import java.io.*;
 import java.util.*;
+import java.awt.*;
 
 public class Board {
+    private boolean finished;
     /** Board size (rows and columns). */
     private static final int SIZE = 9;
 
@@ -69,7 +71,7 @@ public class Board {
                 continue; // already filled
 
             // try values 1..9 in random order
-            List<Integer> vals = new ArrayList<>();
+            ArrayList<Integer> vals = new ArrayList<>();
             for (int v = 1; v <= SIZE; v++)
                 vals.add(v);
             Collections.shuffle(vals, rand);
@@ -213,7 +215,9 @@ public class Board {
         return false;
     }
 
-    /* Board accessors and utilities requested by the assignment */
+    /*
+     * Board accessors and utilities
+     */
 
     public int getCols() {
         return SIZE;
@@ -250,10 +254,12 @@ public class Board {
      * It should make sure the value is unique in its row, in its column, and in its
      * local 3x3 square.
      * 
-     * @param row
-     * @param col
-     * @param value
-     * @return
+     * @param row   the target row index (0-based)
+     * @param col   the target column index (0-based)
+     * @param value the value to test (must be in 1..SIZE)
+     * @return true if placing value at (row,col) would not violate Sudoku
+     *         constraints (row, column, and 3x3 block uniqueness); false
+     *         otherwise (also false when value is out of range)
      */
     public boolean validValue(int row, int col, int value) {
         // value must be between 1 and SIZE (inclusive)
@@ -294,8 +300,11 @@ public class Board {
     }
 
     /**
-     * 
-     * @return
+     * Check whether the current board contains a valid completed solution.
+     *
+     * @return true if every cell contains a value in 1..SIZE and each value
+     *         satisfies Sudoku constraints in its row, column and 3x3 block;
+     *         false otherwise.
      */
     public boolean validSolution() {
         for (int r = 0; r < SIZE; r++) {
@@ -311,23 +320,24 @@ public class Board {
     }
 
     /**
-     * Simple entry point that loads a board from a file (defaults to "board1.txt")
-     * so you can observe the debug output from Board.read(String).
+     * Ensure row and col are within 0..8.
+     *
+     * @param row the row index to validate (0-based)
+     * @param col the column index to validate (0-based)
      */
-    public static void main(String[] args) {
-        String filename = (args != null && args.length > 0) ? args[0] : "board1.txt";
-        Board b = new Board(filename); // constructor calls read(filename), which prints debug info
-        // After reading, print the board in a format matching the input file
-        System.out.println(b.toString());
-        // tell whether the board read from file is solved
-        System.out.println("Solved? " + b.validSolution());
-    }
-
-    /** Ensure row and col are within 0..8. */
     private void checkIndices(int row, int col) {
         if (row < 0 || row >= SIZE || col < 0 || col >= SIZE) {
             throw new IndexOutOfBoundsException("row and col must be in 0..8: got (" + row + ", " + col + ")");
         }
+    }
+
+    /**
+     * Set the finished flag which controls whether the draw method prints the
+     * completion message. Sudoku should call this when it finishes attempting a
+     * solve (success or failure).
+     */
+    public void setFinished(boolean finished) {
+        this.finished = finished;
     }
 
     /**
@@ -348,5 +358,43 @@ public class Board {
                 sb.append('\n');
         }
         return sb.toString();
+    }
+
+    /**
+     * Draw the board onto the provided Graphics context.
+     *
+     * @param g     the Graphics context to draw on
+     * @param scale pixel scale to position and size cells (e.g. 30 or 40)
+     */
+    public void draw(Graphics g, int scale) {
+        for (int i = 0; i < getRows(); i++) {
+            for (int j = 0; j < getCols(); j++) {
+                get(i, j).draw(g, j * scale + 5, i * scale + 10, scale);
+            }
+        }
+        if (finished) {
+            if (validSolution()) {
+                g.setColor(new Color(0, 127, 0));
+                g.drawChars("Hurray!".toCharArray(), 0, "Hurray!".length(), scale * 3 + 5, scale * 10 + 10);
+            } else {
+                g.setColor(new Color(127, 0, 0));
+                g.drawChars("No solution!".toCharArray(), 0, "No Solution!".length(), scale * 3 + 5, scale * 10 + 10);
+            }
+        }
+    }
+
+    /**
+     * Simple entry point that loads a board from a file (defaults to "board1.txt")
+     * so you can observe the debug output from Board.read(String).
+     * 
+     * @param args
+     */
+    public static void main(String[] args) {
+        String filename = (args != null && args.length > 0) ? args[0] : "board1.txt";
+        Board b = new Board(filename); // constructor calls read(filename), which prints debug info
+        // After reading, print the board in a format matching the input file
+        System.out.println(b.toString());
+        // tell whether the board read from file is solved
+        System.out.println("Solved? " + b.validSolution());
     }
 }

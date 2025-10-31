@@ -1,3 +1,11 @@
+/*
+ * file name: Stack.java
+ * author: Jack Dai
+ * last modified: 10/23/2025
+ * purpose of the class:
+ * Creates the Stack interface for the project.
+ */
+
 public interface Stack<T> {
 
     /**
