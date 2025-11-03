@@ -21,6 +21,8 @@ public class WordCounter {
     public WordCounter(String data_structure) {
         if (data_structure.equals("BST")) {
             wordCounts = new BSTMap<String, Integer>();
+        } else if (data_structure.equals("AVL")) {
+            wordCounts = new AVLMap<String, Integer>();
         } else {
             assert data_structure.equals("HashMap") : "Invalid data structure";
             wordCounts = new HashMap<String, Integer>();

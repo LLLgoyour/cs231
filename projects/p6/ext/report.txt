@@ -6,7 +6,7 @@ Data structure: BST
 Reddit (CLEANED_reddit_comments_2015.txt)
   total words: 14975699
   unique words: 43968
-  avg build time over 5 runs: 4944.60 ms
+  avg build time over 5 runs: 5120.00 ms
   maxDepth: 38
   top 10 words:
     like - 180784
@@ -23,8 +23,46 @@ Reddit (CLEANED_reddit_comments_2015.txt)
 Shakespeare (CLEANED_shakespeare.txt)
   total words: 365342
   unique words: 13120
-  avg build time over 5 runs: 105.60 ms
+  avg build time over 5 runs: 105.00 ms
   maxDepth: 35
+  top 10 words:
+    thou - 5485
+    thy - 4032
+    shall - 3591
+    thee - 3178
+    lord - 3059
+    king - 2861
+    good - 2812
+    sir - 2754
+    come - 2507
+    well - 2462
+
+-------------------------------
+
+Data structure: AVL
+
+Reddit (CLEANED_reddit_comments_2015.txt)
+  total words: 14975699
+  unique words: 43968
+  avg build time over 5 runs: 7293.80 ms
+  maxDepth: 19
+  top 10 words:
+    like - 180784
+    dont - 137848
+    would - 130045
+    get - 124499
+    one - 123123
+    people - 111374
+    think - 98193
+    really - 85492
+    time - 82538
+    good - 80540
+
+Shakespeare (CLEANED_shakespeare.txt)
+  total words: 365342
+  unique words: 13120
+  avg build time over 5 runs: 146.60 ms
+  maxDepth: 16
   top 10 words:
     thou - 5485
     thy - 4032
@@ -44,7 +82,7 @@ Data structure: HashMap
 Reddit (CLEANED_reddit_comments_2015.txt)
   total words: 14975699
   unique words: 43968
-  avg build time over 5 runs: 940.00 ms
+  avg build time over 5 runs: 1350.40 ms
   maxDepth: 6
   top 10 words:
     like - 180784
@@ -61,7 +99,7 @@ Reddit (CLEANED_reddit_comments_2015.txt)
 Shakespeare (CLEANED_shakespeare.txt)
   total words: 365342
   unique words: 13120
-  avg build time over 5 runs: 17.80 ms
+  avg build time over 5 runs: 21.60 ms
   maxDepth: 5
   top 10 words:
     thou - 5485

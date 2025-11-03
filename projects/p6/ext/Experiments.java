@@ -2,7 +2,7 @@
 /**
  * file name: Experiments.java
  * author: Jack Dai
- * last modified: 11/01/2025
+ * last modified: 11/02/2025
  *
  * Purpose: Run a small set of experiments comparing two Map implementations
  * (BSTMap and HashMap) on two text datasets (reddit comments and
@@ -95,6 +95,8 @@ public class Experiments {
             MapSet<String, Integer> map;
             if (mapPrototype instanceof BSTMap) {
                 map = new BSTMap<String, Integer>();
+            } else if (mapPrototype instanceof AVLMap) {
+                map = new AVLMap<String, Integer>();
             } else {
                 map = new HashMap<String, Integer>();
             }
@@ -149,7 +151,7 @@ public class Experiments {
         report.append("===========================\n\n");
 
         // For each data structure, run analyses on both datasets
-        for (String ds : new String[] { "BST", "HashMap" }) {
+        for (String ds : new String[] { "BST", "AVL", "HashMap" }) {
             report.append("Data structure: " + ds + "\n\n");
 
             if (ds.equals("BST")) {
@@ -181,6 +183,38 @@ public class Experiments {
                 report.append("  unique words: " + m.size() + "\n");
                 report.append(String.format("  avg build time over %d runs: %.2f ms\n", runs, avg));
                 report.append("  maxDepth: " + m.maxDepth() + "\n");
+                report.append("  top 10 words:\n");
+                for (String s : top10)
+                    report.append("    " + s + "\n");
+                report.append("\n-------------------------------\n\n");
+
+            } else if (ds.equals("AVL")) {
+                // AVL
+                AVLMap<String, Integer> a = new AVLMap<>();
+                double avg = averageBuildTime(a, redditWords, runs);
+                a.clear();
+                buildMap(a, redditWords);
+                ArrayList<String> top10 = topN(a, 10);
+                report.append("Reddit (" + reddit + ")\n");
+                report.append("  total words: " + redditWords.size() + "\n");
+                report.append("  unique words: " + a.size() + "\n");
+                report.append(String.format("  avg build time over %d runs: %.2f ms\n", runs, avg));
+                report.append("  maxDepth: " + a.maxDepth() + "\n");
+                report.append("  top 10 words:\n");
+                for (String s : top10)
+                    report.append("    " + s + "\n");
+                report.append("\n");
+
+                a = new AVLMap<>();
+                avg = averageBuildTime(a, shakespeareWords, runs);
+                a.clear();
+                buildMap(a, shakespeareWords);
+                top10 = topN(a, 10);
+                report.append("Shakespeare (" + shakespeare + ")\n");
+                report.append("  total words: " + shakespeareWords.size() + "\n");
+                report.append("  unique words: " + a.size() + "\n");
+                report.append(String.format("  avg build time over %d runs: %.2f ms\n", runs, avg));
+                report.append("  maxDepth: " + a.maxDepth() + "\n");
                 report.append("  top 10 words:\n");
                 for (String s : top10)
                     report.append("    " + s + "\n");
