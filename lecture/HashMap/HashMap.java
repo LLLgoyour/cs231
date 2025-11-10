@@ -1,5 +1,6 @@
 import java.lang.Math;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class HashMap<K, V> {
 
@@ -55,10 +56,10 @@ public class HashMap<K, V> {
             filled++;
         } else {
             // Handle collisions by traversing the linked list
-            while (current.next != null && current.key != key) {
+            while (current.next != null && !current.key.equals(key)) {
                 current = current.next;
             }
-            if (current.key == key) {
+            if (current.key.equals(key)) {
                 // Update the value if the key already exists
                 current.value = value;
             } else {
@@ -90,17 +91,27 @@ public class HashMap<K, V> {
 
     // Method to check if a key exists in the hash table
     public boolean contains(K key) {
-
+        return find(key) != null;
     }
 
     // Method to retrieve a value based on its key
     public V get(K key) {
-
+        HashNode node = find(key);
+        return node == null ? null : node.value;
     }
 
     // Method to find and return the node for a given key
     public HashNode find(K key) {
-
+        int position = hash(key);
+        // access the bucket at the computed position
+        HashNode current = (HashNode) hashTable[position];
+        while (current != null) {
+            if (Objects.equals(current.key, key)) {
+                return current;
+            }
+            current = current.next;
+        }
+        return null;
     }
 
     // Method to clear the hash table
@@ -110,25 +121,55 @@ public class HashMap<K, V> {
 
     // Method to remove a key-value pair by key
     public boolean remove(K key) {
-
+        int position = hash(key);
         // Traverse the linked list to find the node
+        HashNode current = (HashNode) hashTable[position];
+        HashNode prev = null;
+
+        while (current != null && !Objects.equals(current.key, key)) {
+            prev = current;
+            current = current.next;
+        }
 
         // Key not found
+        if (current == null)
+            return false;
 
         // Remove the head node
-
-        // Remove node in the middle or end
-
+        if (prev == null) {
+            hashTable[position] = current.next;
+        } else {
+            // Remove node in the middle or end
+            prev.next = current.next;
+        }
+        filled--;
+        return true;
     }
 
     // Method to get all keys in the hash table
     public ArrayList<K> keySet() {
-
+        ArrayList<K> results = new ArrayList<>();
+        for (int i = 0; i < tableSize; i++) {
+            HashNode node = (HashNode) hashTable[i];
+            while (node != null) {
+                results.add(node.key);
+                node = node.next;
+            }
+        }
+        return results;
     }
 
     // Method to get all values in the hash table
     public ArrayList<V> values() {
-
+        ArrayList<V> results = new ArrayList<>();
+        for (int i = 0; i < tableSize; i++) {
+            HashNode node = (HashNode) hashTable[i];
+            while (node != null) {
+                results.add(node.value);
+                node = node.next;
+            }
+        }
+        return results;
     }
 
     // Method to get all key-value pairs in the hash table
@@ -137,9 +178,11 @@ public class HashMap<K, V> {
         for (int i = 0; i < tableSize; i++) {
             HashNode node = (HashNode) hashTable[i];
             while (node != null) {
-
+                results.add(node);
+                node = node.next;
             }
         }
+        return results;
     }
 
     public static void main(String[] args) {
