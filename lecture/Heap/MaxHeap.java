@@ -3,7 +3,7 @@ public class MaxHeap {
     private int size;
     private int maxsize;
 
-    public MaxHeap(int maxsiz) {
+    public MaxHeap(int maxsize) {
         this.maxsize = maxsize;
         this.size = 0;
         heap = new int[this.maxsize + 1];
