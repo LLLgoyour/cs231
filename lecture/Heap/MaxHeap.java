@@ -44,6 +44,7 @@ public class MaxHeap {
             return;
         }
 
+        // Get the left and right child indices
         int left = leftChild(position);
         int right = rightChild(position);
         int largest = position;
@@ -60,16 +61,38 @@ public class MaxHeap {
             swap(position, largest);
             maxHeapify(largest);
         }
+
+        /*
+        // Continue heapifying while the left child index is within the heap size
+        while(left <= size){
+            Integer maxIndex = left;
+
+            // Determine the index of the larger child
+            if (right < this.size && heap[right] > heap[left])
+                maxIndex = right;
+
+            // If the current node is less than the larger child, swap them
+            if (heap[position] < heap[maxIndex]){
+                swap(position, maxIndex);
+                position = maxIndex;
+                left = leftChild(position);
+                right = rightChild(position); 
+            }
+            else{
+                break;
+            }
+        }
+        */
     }
 
     // remove an element from the max heap
-    public int extractMax() {
+    public int extractMax(int position) {
         // store the maximum element
-        int popped = heap[1];
-        heap[1] = heap[size--];
-        heap[size + 1] = popped;
+        int popped = heap[position]; // if position == 1: store the root node
+        heap[position] = heap[size--]; // if position == 1: replace the root node with the last node
+        heap[size + 1] = popped; // if position == 1: replace the last node with the popped node (root node)
 
-        maxHeapify(1);
+        maxHeapify(position);
         return popped;
 
     }
@@ -100,5 +123,12 @@ public class MaxHeap {
             swap(current, parent(current));
             current = parent(current);
         }
+    }
+
+    private boolean isLeaf(int position) {
+        if (position >= (size / 2) && position <= size) {             
+            return true;         
+        }        
+        return false;     
     }
 }
