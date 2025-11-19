@@ -1,7 +1,7 @@
 /*
  * file name: LinkedList.java
  * author: Jack Dai
- * last modified: 10/08/2025
+ * last modified: 11/16/2025
  * purpose of this class:
  * A linked list implementation that supports any data type (T)
  */
@@ -139,6 +139,7 @@ public class LinkedList<T> implements Iterable<T>, Queue<T>, Stack<T> {
         if (this.head == null) {
             this.tail = null;
         }
+        this.size--;
         return data;
     }
 

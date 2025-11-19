@@ -1,3 +1,14 @@
+
+/*
+ * file name: Heap.java
+ * author: Jack Dai
+ * last modified: 11/14/2025
+ * purpose of the class:
+ * This Heap will be an array-based Binary Heap. A binary heap is a rooted-tree structure that follows two rules:
+ * - The data of every node in the tree other than the root has value no less than its parent.
+ * - The shape of the tree is such that every level other than the last is fully filled and the last is filled from left to right.
+ */
+
 import java.util.ArrayList;
 import java.util.Comparator;
 
