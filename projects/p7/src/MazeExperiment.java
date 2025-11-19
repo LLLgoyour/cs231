@@ -1,6 +1,21 @@
 public class MazeExperiment {
 
     public static void main(String[] args) {
+        // run `java MazeExperiment visual` to see one search
+        if (args != null && args.length > 0 && "visual".equals(args[0])) {
+            Maze maze = new Maze(25, 25, 0.25);
+            Cell start = maze.get(1, 1);
+            Cell target = maze.get(maze.getRows() - 2, maze.getCols() - 2);
+            start.setType(CellType.FREE);
+            target.setType(CellType.FREE);
+
+            // pick one algorithm to visualize (change to MazeDepthFirstSearch or
+            // MazeAStarSearch)
+            MazeBreadthFirstSearch bfssearch = new MazeBreadthFirstSearch(maze);
+            // display=true, delay=50ms between steps
+            bfssearch.search(start, target, true, 50);
+            return;
+        }
         int rows = 20;
         int cols = 20;
         int trials = 100; // trials per density
