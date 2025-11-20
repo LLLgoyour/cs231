@@ -1,13 +1,16 @@
 /*
  * file name: AbstractMazeSearch.java
  * author: Jack Dai
- * last modified: 11/16/2025
+ * last modified: 11/19/2025
  * purpose of the class:
- * To unite DFS, BFS, A* classes to search a maze (as they will all behave extremely similarly).
+ * To unite DFS, BFS, A* classes to search a maze (as they will all behave extremely similarly). 
+ * Updated to support the extension experiment.
  */
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class AbstractMazeSearch {
 
@@ -15,12 +18,15 @@ public abstract class AbstractMazeSearch {
     private Cell start;
     private Cell target;
     private Cell cur;
+    // Tracks the order in which cells are removed from the frontier
+    private List<Cell> visitedOrder;
 
     public AbstractMazeSearch(Maze maze) {
         this.maze = maze;
         this.start = null;
         this.target = null;
         this.cur = null;
+        this.visitedOrder = new ArrayList<Cell>();
     }
 
     // Abstract methods for specific search strategies
@@ -91,6 +97,16 @@ public abstract class AbstractMazeSearch {
     }
 
     /**
+     * Returns the order in which cells were removed from the frontier during
+     * the most recent call to {@link #search}.
+     * 
+     * @return a List of Cells in visitation order (may be empty)
+     */
+    public List<Cell> getVisitedOrder() {
+        return this.visitedOrder;
+    }
+
+    /**
      * This method returns the current Cell location of the search.
      * 
      * @return the current Cell location of the search.
@@ -115,6 +131,13 @@ public abstract class AbstractMazeSearch {
         this.start = null;
         this.target = null;
         this.cur = null;
+    }
+
+    /**
+     * Clears visitation order. Called at beginning of search.
+     */
+    private void clearVisitedOrder() {
+        this.visitedOrder.clear();
     }
 
     /**
@@ -218,6 +241,9 @@ public abstract class AbstractMazeSearch {
         // For drawing correctness
         start.setPrev(start);
 
+        // clear any prior visitation record
+        clearVisitedOrder();
+
         // create display if requested
         MazeSearchDisplay displayWin = null;
         if (display) {
@@ -240,6 +266,9 @@ public abstract class AbstractMazeSearch {
             }
 
             Cell current = findNextCell();
+            // record visitation order (the cell we actually pulled from the frontier)
+            if (current != null)
+                this.visitedOrder.add(current);
             setCur(current);
 
             // explore neighbors
