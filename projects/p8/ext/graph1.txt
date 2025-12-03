@@ -1,0 +1,6 @@
+n_vertices: 4
+start_vertex,end_vertex
+0,1
+1,2
+2,3
+3,0

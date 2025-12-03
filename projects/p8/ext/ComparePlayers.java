@@ -1,17 +1,14 @@
-/*
- * file name: ComparePlayers.java
- * author: Jack Dai
- * last modified: 12/3/2025
- * purpose of the class:
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.time.LocalDateTime;
+import java.util.HashMap;
+
+/**
  * Runs batch comparisons between Voronoi player algorithms (Influence, Random,
  * Greedy) without visualization and exports summary statistics to a text file.
  */
-
-import java.io.FileWriter;
-import java.io.PrintWriter;
-import java.util.HashMap;
-
 public class ComparePlayers {
+
     private static class Stats {
         public int games = 0;
         public int aWins = 0;
