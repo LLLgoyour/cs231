@@ -186,9 +186,9 @@ public class VoronoiGraph extends Graph {
     public HashMap<VertexPair, Double> calculateDistances() {
         HashMap<VertexPair, Double> out = new HashMap<>();
         for (Vertex u : getVertices()) {
-            for (Vertex v : getVertices()) 
+            for (Vertex v : getVertices())
                 out.put(new VertexPair(u, v), Double.POSITIVE_INFINITY);
-            
+
             out.put(new VertexPair(u, u), 0.0);
 
             for (Edge e : u.incidentEdges())
@@ -217,5 +217,16 @@ public class VoronoiGraph extends Graph {
      */
     public HashMap<Integer, Integer> playerValues() {
         return playerValues;
+    }
+
+    /**
+     * Returns a copy of the current token placements: a map from token Vertex to
+     * the player index that placed that token.
+     *
+     * This is used by lookahead/simulation players to reason about the current
+     * token configuration without mutating the graph state.
+     */
+    public HashMap<Vertex, Integer> getTokens() {
+        return new HashMap<>(tokens);
     }
 }

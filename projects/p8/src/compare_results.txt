@@ -1,0 +1,30 @@
+ComparePlayers results
+
+Influence vs Random
+Games: 200
+A wins: 200 (A first wins: 100, A second wins: 100)
+B wins: 0
+Ties: 0
+Avg score A: 3410.720
+Avg score B: 1504.690
+Avg margin (A - B): 1906.030
+A win rate: 1.000
+B win rate: 0.000
+Tie rate: 0.000
+
+Influence vs Greedy
+Games: 200
+A wins: 199 (A first wins: 99, A second wins: 100)
+B wins: 1
+Ties: 0
+Avg score A: 3107.730
+Avg score B: 1870.960
+Avg margin (A - B): 1236.770
+A win rate: 0.995
+B win rate: 0.005
+Tie rate: 0.000
+
+Notes:
+- Each 'game' uses a new random VoronoiGraph(n=100, density=0.1) and plays 10 turns per player.
+- A move that times out is skipped (no token placed).
+- Results include overall wins, ties, average scores, and margins.
