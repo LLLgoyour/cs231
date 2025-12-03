@@ -1,4 +1,4 @@
-/**
+/*
  * file name: VoronoiInfluencePlayer.java
  * author: Jack Dai
  * last modified: 12/2/2025
@@ -27,10 +27,26 @@
  */
 public class VoronoiInfluencePlayer extends VoronoiPlayerAlgorithm {
 
+    /**
+     * Construct a VoronoiInfluencePlayer bound to the given graph.
+     *
+     * @param g the VoronoiGraph this player will operate on (must not be
+     *          null)
+     */
     public VoronoiInfluencePlayer(VoronoiGraph g) {
         super(g);
     }
 
+    /**
+     * Choose a vertex for the next token placement using the influence heuristic.
+     *
+     * @param playerIndex       the index of the player choosing the vertex
+     *                          (0-based)
+     * @param numRemainingTurns the number of turns remaining for this player after
+     *                          this one
+     * @return a Vertex selected for placement, or null if no valid
+     *         move exists
+     */
     public Vertex chooseVertex(int playerIndex, int numRemainingTurns) {
         Vertex best = null;
         int bestScore = Integer.MIN_VALUE;

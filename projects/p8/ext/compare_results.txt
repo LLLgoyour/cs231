@@ -5,23 +5,59 @@ Games: 200
 A wins: 200 (A first wins: 100, A second wins: 100)
 B wins: 0
 Ties: 0
-Avg score A: 3410.720
-Avg score B: 1504.690
-Avg margin (A - B): 1906.030
+Avg score A: 3452.325
+Avg score B: 1520.475
+Avg margin (A - B): 1931.850
 A win rate: 1.000
 B win rate: 0.000
 Tie rate: 0.000
 
 Influence vs Greedy
 Games: 200
-A wins: 199 (A first wins: 99, A second wins: 100)
-B wins: 1
+A wins: 200 (A first wins: 100, A second wins: 100)
+B wins: 0
 Ties: 0
-Avg score A: 3107.730
-Avg score B: 1870.960
-Avg margin (A - B): 1236.770
-A win rate: 0.995
-B win rate: 0.005
+Avg score A: 3116.645
+Avg score B: 1877.295
+Avg margin (A - B): 1239.350
+A win rate: 1.000
+B win rate: 0.000
+Tie rate: 0.000
+
+Neighborhood vs Random
+Games: 200
+A wins: 144 (A first wins: 74, A second wins: 70)
+B wins: 56
+Ties: 0
+Avg score A: 2648.465
+Avg score B: 2316.305
+Avg margin (A - B): 332.160
+A win rate: 0.720
+B win rate: 0.280
+Tie rate: 0.000
+
+Neighborhood vs Greedy
+Games: 200
+A wins: 75 (A first wins: 39, A second wins: 36)
+B wins: 125
+Ties: 0
+Avg score A: 2394.270
+Avg score B: 2503.640
+Avg margin (A - B): -109.370
+A win rate: 0.375
+B win rate: 0.625
+Tie rate: 0.000
+
+Neighborhood vs Influence
+Games: 200
+A wins: 0 (A first wins: 0, A second wins: 0)
+B wins: 200
+Ties: 0
+Avg score A: 1612.835
+Avg score B: 3317.655
+Avg margin (A - B): -1704.820
+A win rate: 0.000
+B win rate: 1.000
 Tie rate: 0.000
 
 Notes:

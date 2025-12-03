@@ -1,14 +1,17 @@
-import java.io.FileWriter;
-import java.io.PrintWriter;
-import java.time.LocalDateTime;
-import java.util.HashMap;
-
-/**
- * Runs batch comparisons between Voronoi player algorithms (Influence, Random,
+/*
+ * file name: ComparePlayers.java
+ * author: Jack Dai
+ * last modified: 12/3/2025
+ * purpose of the class:
+ * Runs batch comparisons between Voronoi player algorithms (Neighborhood, Influence, Random,
  * Greedy) without visualization and exports summary statistics to a text file.
  */
-public class ComparePlayers {
 
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.util.HashMap;
+
+public class ComparePlayers {
     private static class Stats {
         public int games = 0;
         public int aWins = 0;
@@ -34,6 +37,14 @@ public class ComparePlayers {
         Stats vsGreedy = compare(VoronoiInfluencePlayer.class, VoronoiGreedyPlayer.class, games, numVertices,
                 density, numTurns, timeLimitMs);
 
+        // comparisons for the new neighborhood heuristic
+        Stats neigh_vsRandom = compare(VoronoiNeighborhoodPlayer.class, VoronoiRandomPlayer.class, games,
+                numVertices, density, numTurns, timeLimitMs);
+        Stats neigh_vsGreedy = compare(VoronoiNeighborhoodPlayer.class, VoronoiGreedyPlayer.class, games,
+                numVertices, density, numTurns, timeLimitMs);
+        Stats neigh_vsInfluence = compare(VoronoiNeighborhoodPlayer.class, VoronoiInfluencePlayer.class, games,
+                numVertices, density, numTurns, timeLimitMs);
+
         // write results
         try (PrintWriter out = new PrintWriter(new FileWriter("compare_results.txt", false))) {
             out.println("ComparePlayers results");
@@ -42,6 +53,12 @@ public class ComparePlayers {
             writeSection(out, "Influence vs Random", vsRandom);
             out.println();
             writeSection(out, "Influence vs Greedy", vsGreedy);
+            out.println();
+            writeSection(out, "Neighborhood vs Random", neigh_vsRandom);
+            out.println();
+            writeSection(out, "Neighborhood vs Greedy", neigh_vsGreedy);
+            out.println();
+            writeSection(out, "Neighborhood vs Influence", neigh_vsInfluence);
 
             out.println();
             out.println("Notes:");
