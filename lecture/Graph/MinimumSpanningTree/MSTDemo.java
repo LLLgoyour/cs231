@@ -14,7 +14,15 @@ public class MSTDemo {
      * select the edge with the smallest weight, and add it to the selection
      * as long as it does not create a cycle.
      * 
+     * MST Example:
+     * a->c->b->d
      * 
+     * find a cycle in a graph:
+     * algorithm:
+     * 1. traverse the graph (BFS, DFS)
+     * 2. mark vertex as visited
+     * if encounter a marked vertex, that isn't the parent of the current vertex,
+     * then we have a cycle
      */
 
     // Finding a path
@@ -40,5 +48,32 @@ public class MSTDemo {
                 }
             }
         }
+    }
+
+    // methods: find a cycle in the graph
+    public boolean hasCycle() {
+        this.unVisitAll();
+
+        for (Vertex adjacent : this.vertices) {
+            if (!adjacent.checkMarked()) {
+                if (checkCycle(adjacent, null)) {
+                    return true;
+                }
+            }
+        }
+    }
+
+    public boolean checkCycle(Vertex current, Vertex parent) {
+        current.mark();
+        for (Vertex adjacent : current.getNeighbors()) {
+            if (!adjacent.checkMarked()) {
+                if (checkCycle(adjacent, current)) {
+                    return true;
+                }
+            } else if (adjacent != parent) {
+                return true;
+            }
+        }
+        return true;
     }
 }
