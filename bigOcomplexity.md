@@ -4,8 +4,8 @@
 | -------------------------- | --------                | ------------------- |
 |                            | Access                  | search              | insertion | deletion       | Access       | search  | insertion | deletion |
 | -------------------------- | -------                 | --------            | ------    | ------         | ---------    | ------- | ------    | -------- |
-| Array                      | O(1)                    | O(n)                | O(n)      | O(1)           | O(1)         | O(n)    | O(n)      | O(1)     |
-| ArrayList                  | O(1)                    | O(n)                | O(n)      | O(1)           | O(1)         | O(n)    | O(n)      | O(1)     |
+| Array                      | O(1)                    | O(n)                | O(n)      | O(n)           | O(1)         | O(n)    | O(n)      | O(n)     |
+| ArrayList                  | O(1)                    | O(n)                | O(n)      | O(1)           | O(1)         | O(n)    | O(1)      | O(1)     |
 | LinkedList (singly linked) | O(1)                    | O(n)                | O(1)      | O(1)           |
 | Stack (linked)             | O(n)                    | O(n)                | O(1)      | O(1)           | O(n)         | O(n)    | O(1)      | O(1)     |
 | Queue (linked)             | O(1)                    | O(n)                | O(1)      | O(1)           | O(1)         | O(n)    | O(1)      | O(1)     |
